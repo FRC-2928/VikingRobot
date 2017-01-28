@@ -5,6 +5,7 @@ import org.usfirst.frc.team2928.subsystems.Drivebase;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import org.usfirst.frc.team2928.subsystems.GearManipulator;
 
 /**
  * Robot for the test platform.
@@ -13,11 +14,13 @@ public class Robot extends IterativeRobot {
 
     public static Drivebase drivebase;
     public static OperatorInterface oi;
+    public static GearManipulator gearmanipulator;
 
     @Override
     public void robotInit() {
         oi = new OperatorInterface();
         drivebase = new Drivebase();
+        gearmanipulator = new GearManipulator();
     }
 
     @Override
