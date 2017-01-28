@@ -17,7 +17,7 @@ public class GearManipulator extends Subsystem{
     private final Solenoid lArm;
     private final Solenoid rArm;
     private final Solenoid lFlipper;
-    private final Solenoid rFlipper
+    private final Solenoid rFlipper;
 
     @Override
     protected void initDefaultCommand() {
