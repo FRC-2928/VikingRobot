@@ -24,7 +24,7 @@ public class OperatorInterface {
         driveStick = new Joystick(DRIVE_JOYSTICK_PORT);
         flipButtion = new JoystickButton(driveStick,FLIP_BUTTON_PORT);
         flipButtion.whileHeld(new FlipGear());
-        openButton = new JoystickButton(driveStick,OPEN_GEAR_MANIPULATOR_PORT;
+        openButton = new JoystickButton(driveStick,OPEN_GEAR_MANIPULATOR_PORT);
         openButton.whenPressed(new OpenGearManipulator());
         closeButton = new JoystickButton(driveStick,CLOSE_GEAR_MANIPULATOR_PORT);
         closeButton.whenPressed(new CloseGearManipulator());
