@@ -8,21 +8,26 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class GearManipulator extends Subsystem{
 
+    private final int LEFT_ARM_SOLENOID_PORT = 1;
+    private final int RIGHT_ARM_SOLENOID_PORT = 1;
+    private final int LEFT_FLIPPER_SOLENOID_PORT = 1;
+    private final int RIGHT_FLIPPER_SOLENOID_PORT = 1;
+
     private boolean closed = false;
     private final Solenoid lArm;
     private final Solenoid rArm;
     private final Solenoid lFlipper;
-    private final Solenoid rFlipper;
+    private final Solenoid rFlipper
 
     @Override
     protected void initDefaultCommand() {
 
     }
     public GearManipulator(){
-         lArm = new Solenoid(/*CHANNEL*/);
-         rArm = new Solenoid(/*CHANNEL*/;
-         lFlipper = new Solenoid(/*CHANNEL*/);
-         rFlipper = new Solenoid(/*CHANNEL*/);
+         lArm = new Solenoid(LEFT_ARM_SOLENOID_PORT);
+         rArm = new Solenoid(RIGHT_ARM_SOLENOID_PORT);
+         lFlipper = new Solenoid(LEFT_FLIPPER_SOLENOID_PORT);
+         rFlipper = new Solenoid(RIGHT_FLIPPER_SOLENOID_PORT);
          close();
 
     }

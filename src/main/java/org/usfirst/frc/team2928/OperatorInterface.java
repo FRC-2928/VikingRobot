@@ -9,8 +9,11 @@ import org.usfirst.frc.team2928.commands.OpenGearManipulator;
 
 public class OperatorInterface {
 
-    // TODO: Determine proper port for joystick
+    // TODO: Determine proper port for joystick/buttons
     private static final int DRIVE_JOYSTICK_PORT = 1;
+    private static final int FLIP_BUTTON_PORT = 1;
+    private static final int OPEN_GEAR_MANIPULATOR_PORT = 2;
+    private static final int CLOSE_GEAR_MANIPULATOR_PORT = 3;
 
     private final Joystick driveStick;
     private final JoystickButton flipButtion;
@@ -19,11 +22,11 @@ public class OperatorInterface {
 
     public OperatorInterface() {
         driveStick = new Joystick(DRIVE_JOYSTICK_PORT);
-        flipButtion = new JoystickButton(driveStick,/*BUTTON_NUMBER*/);
+        flipButtion = new JoystickButton(driveStick,FLIP_BUTTON_PORT);
         flipButtion.whileHeld(new FlipGear());
-        openButton = new JoystickButton(driveStick,/*BUTTON_NUMBER*/);
+        openButton = new JoystickButton(driveStick,OPEN_GEAR_MANIPULATOR_PORT;
         openButton.whenPressed(new OpenGearManipulator());
-        closeButton = new JoystickButton(driveStick,/*BUTTON_NUMBER*/);
+        closeButton = new JoystickButton(driveStick,CLOSE_GEAR_MANIPULATOR_PORT);
         closeButton.whenPressed(new CloseGearManipulator());
     }
 
