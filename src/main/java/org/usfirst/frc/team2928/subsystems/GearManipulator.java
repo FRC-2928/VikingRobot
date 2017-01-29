@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearManipulator extends Subsystem{
 
     private final int LEFT_ARM_SOLENOID_PORT = 1;
-    private final int RIGHT_ARM_SOLENOID_PORT = 1;
-    private final int LEFT_FLIPPER_SOLENOID_PORT = 1;
-    private final int RIGHT_FLIPPER_SOLENOID_PORT = 1;
+    private final int RIGHT_ARM_SOLENOID_PORT = 2;
+    private final int LEFT_FLIPPER_SOLENOID_PORT = 3;
+    private final int RIGHT_FLIPPER_SOLENOID_PORT = 4;
 
     private boolean closed = false;
     private final Solenoid lArm;

@@ -11,9 +11,9 @@ public class OperatorInterface {
 
     // TODO: Determine proper port for joystick/buttons
     private static final int DRIVE_JOYSTICK_PORT = 1;
-    private static final int FLIP_BUTTON_PORT = 1;
-    private static final int OPEN_GEAR_MANIPULATOR_PORT = 2;
-    private static final int CLOSE_GEAR_MANIPULATOR_PORT = 3;
+    private static final int FLIP_BUTTON_PORT = 2;
+    private static final int OPEN_GEAR_MANIPULATOR_PORT = 3;
+    private static final int CLOSE_GEAR_MANIPULATOR_PORT = 4;
 
     private final Joystick driveStick;
     private final JoystickButton flipButtion;
