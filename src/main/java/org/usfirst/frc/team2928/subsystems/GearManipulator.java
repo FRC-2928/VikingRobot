@@ -20,9 +20,8 @@ public class GearManipulator extends Subsystem{
     private final Solenoid rFlipper;
 
     @Override
-    protected void initDefaultCommand() {
+    protected void initDefaultCommand() {}
 
-    }
     public GearManipulator(){
          lArm = new Solenoid(LEFT_ARM_SOLENOID_PORT);
          rArm = new Solenoid(RIGHT_ARM_SOLENOID_PORT);

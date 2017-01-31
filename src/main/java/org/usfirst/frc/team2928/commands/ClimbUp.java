@@ -4,23 +4,22 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2928.Robot;
 
 /**
- * Created by Max on 1/28/2017.
+ * Created by Erika on 1/30/2017.
  */
-public class FlipGear extends Command{
+public class ClimbUp extends Command{
 
-    public FlipGear(){
+    public ClimbUp(){
         super();
-        requires(Robot.gearmanipulator);
+        requires(Robot.ropeclimber);
     }
 
     @Override
     protected void initialize(){
-        Robot.gearmanipulator.flipUp();
+        Robot.ropeclimber.drive(1);
     }
 
-    @Override
     protected void end(){
-        Robot.gearmanipulator.flipDown();
+        Robot.ropeclimber.drive(0);
     }
 
     @Override

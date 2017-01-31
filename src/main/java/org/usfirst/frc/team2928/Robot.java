@@ -7,6 +7,7 @@ import org.usfirst.frc.team2928.subsystems.Drivebase;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team2928.subsystems.GearManipulator;
+import org.usfirst.frc.team2928.subsystems.RopeClimber;
 import org.usfirst.frc.team2928.subsystems.VisionTracking;
 
 /**
@@ -18,6 +19,7 @@ public class Robot extends IterativeRobot {
     public static OperatorInterface oi;
     public static GearManipulator gearmanipulator;
     public static VisionTracking visiontracking;
+    public static RopeClimber ropeclimber;
 
     @Override
     public void robotInit() {
@@ -25,6 +27,7 @@ public class Robot extends IterativeRobot {
         gearmanipulator = new GearManipulator();
         visiontracking = new VisionTracking();
         oi = new OperatorInterface();
+        ropeclimber = new RopeClimber();
     }
 
     @Override
