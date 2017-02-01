@@ -9,9 +9,6 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * The drive system on the test platform consists of one motor.
- */
 public class Drivebase extends Subsystem {
 
     private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 14;
