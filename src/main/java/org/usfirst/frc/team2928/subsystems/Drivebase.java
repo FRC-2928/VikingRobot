@@ -27,6 +27,8 @@ public class Drivebase extends Subsystem {
         motor.set(input);
     }
 
+    public double getEncoderVelocity(){ return motor.getEncVelocity();}
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new JoystickDrive());
