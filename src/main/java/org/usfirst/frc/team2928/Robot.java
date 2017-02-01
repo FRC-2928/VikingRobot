@@ -18,6 +18,7 @@ public class Robot extends IterativeRobot {
     public static VisionTracking visiontracking;
     public static RopeClimber ropeclimber;
     public static Shooter shooter;
+    public static Shifter shifter;
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
         oi = new OperatorInterface();
         ropeclimber = new RopeClimber();
         shooter = new Shooter();
+        shifter = new Shifter();
     }
 
     @Override

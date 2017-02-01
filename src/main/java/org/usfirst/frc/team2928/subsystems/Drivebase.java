@@ -80,6 +80,8 @@ public class Drivebase extends Subsystem {
         return gyro.getAngle();
     }
 
+    public double getEncoderVelocity(){ return motor.getEncVelocity();}
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new JoystickDrive());
