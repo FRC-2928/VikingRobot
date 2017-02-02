@@ -80,7 +80,7 @@ public class Drivebase extends Subsystem {
         return gyro.getAngle();
     }
 
-    public double getEncoderVelocity(){ return motor.getEncVelocity();}
+    public double getEncoderVelocity(){ return new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER).getEncVelocity();}
 
     @Override
     protected void initDefaultCommand() {

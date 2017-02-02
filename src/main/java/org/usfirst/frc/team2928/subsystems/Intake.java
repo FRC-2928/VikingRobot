@@ -16,8 +16,12 @@ public class Intake extends Subsystem {
         talon = new CANTalon(TALON_NUMBER);
     }
 
-    public void activateTalon(){
+    public void activateIntake(){
         talon.set(1);
+    }
+
+    public void deactivateIntake(){
+        talon.set(0);
     }
 
     @Override

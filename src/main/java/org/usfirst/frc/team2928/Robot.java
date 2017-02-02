@@ -19,6 +19,7 @@ public class Robot extends IterativeRobot {
     public static RopeClimber ropeclimber;
     public static Shooter shooter;
     public static Shifter shifter;
+    public static Intake intake;
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
