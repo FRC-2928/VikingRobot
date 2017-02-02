@@ -29,6 +29,7 @@ public class Robot extends IterativeRobot {
         ropeclimber = new RopeClimber();
         shooter = new Shooter();
         shifter = new Shifter();
+        intake = new Intake();
     }
 
     @Override
