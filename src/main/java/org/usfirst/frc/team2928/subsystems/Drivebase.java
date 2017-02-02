@@ -23,8 +23,8 @@ public class Drivebase extends Subsystem {
             super();
             robotDrive = new RobotDrive(FRONT_LEFT_MOTOR_DEVICE_NUMBER, FRONT_RIGHT_MOTOR_DEVICE_NUMBER, BACK_LEFT_MOTOR_DEVICE_NUMBER, BACK_RIGHT_MOTOR_DEVICE_NUMBER);
         }
-        public void drive(double move, double rotate) {
-            robotDrive.arcadeDrive(move, rotate);
+        public void drive(double x, double y) {
+            robotDrive.arcadeDrive(x,y);
         }
         /*
             Three cases: above target, below target, and completely off target
