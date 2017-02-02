@@ -8,6 +8,7 @@ import org.usfirst.frc.team2928.Robot;
  * Created by Viking Robotics on 2/1/2017.
  */
 public class VisionDriveCommand extends PIDCommand {
+
     public VisionDriveCommand()
     {
         super(.5,0,0);
@@ -15,26 +16,25 @@ public class VisionDriveCommand extends PIDCommand {
         requires(Robot.visiontracking);
         getPIDController().setAbsoluteTolerance(1);
         getPIDController().setOutputRange(-.6,.6);
-        getPIDController().setSetpoint(Robot.visiontracking.getPos());
+        getPIDController().setSetpoint(0);
     }
 
     @Override
     protected double returnPIDInput() {
-        return Robot.drivebase.getGyroAngle();
+        return Robot.visiontracking.getPos();
     }
 
     @Override
     protected void usePIDOutput(double output) {
-        Robot.drivebase.visionDrive(output);
+        Robot.drivebase.drive(0, output);
     }
 
-    protected void initialize() {
-        Robot.drivebase.calibrateGyro();
-    }
-
-    protected void execute()
-    {
-
+    protected void execute() {
+        if (Robot.visiontracking.getLocked()) {
+            getPIDController().enable();
+        } else {
+            getPIDController().disable();
+        }
     }
 
     protected boolean isFinished() {
