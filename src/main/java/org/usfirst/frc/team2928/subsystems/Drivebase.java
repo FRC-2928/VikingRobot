@@ -41,7 +41,6 @@ public class Drivebase extends Subsystem {
         Gyro PID that takes in the degrees as the current input
         A method that turns right until the input is > -1 or left in the opposite case
      */
-
     public boolean inRange(){
         if ((Robot.visiontracking.getPos() < MAX_FIELD_OF_VIEW) && (Robot.visiontracking.getPos() > -MAX_FIELD_OF_VIEW)) {
             return true;
@@ -81,7 +80,7 @@ public class Drivebase extends Subsystem {
         return gyro.getAngle();
     }
 
-    public double getEncoderVelocity(){ return new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER).getEncVelocity();}
+    public double getEncoderVelocity(){ return motor.getEncVelocity();}
 
     @Override
     protected void initDefaultCommand() {

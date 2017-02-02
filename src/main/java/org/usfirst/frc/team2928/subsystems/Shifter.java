@@ -18,10 +18,12 @@ public class Shifter extends Subsystem {
         rightSolenoid= new Solenoid(RIGHT_SHIFT_PORT);
     }
 
+    //Sets the shift up
     public void shiftUp(){
         leftSolenoid.set(false);
         rightSolenoid.set(false);
     }
+    //Sets the shift down
     public void shiftDown(){
         leftSolenoid.set(true);
         rightSolenoid.set(true);
