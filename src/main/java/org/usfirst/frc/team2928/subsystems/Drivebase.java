@@ -11,20 +11,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivebase extends Subsystem {
 
-    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 14;
-    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 15;
-    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 1;
-    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
+    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 15;
+    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 0;
+    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 14;
+    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 1;
     private static final int MAX_FIELD_OF_VIEW = 30;
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     private final RobotDrive robotDrive;
 
         public Drivebase() {
             super();
-            robotDrive = new RobotDrive(FRONT_LEFT_MOTOR_DEVICE_NUMBER, FRONT_RIGHT_MOTOR_DEVICE_NUMBER, BACK_LEFT_MOTOR_DEVICE_NUMBER, BACK_RIGHT_MOTOR_DEVICE_NUMBER);
+            CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
+            CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
+            CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
+            CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
+            frontLeft.setInverted(true);
+            backLeft.setInverted(true);
+            frontRight.setInverted(true);
+            backRight.setInverted(true);
+            robotDrive = new RobotDrive(frontLeft,backLeft,frontRight,backRight);
         }
-        public void drive(double x, double y) {
-            robotDrive.arcadeDrive(x,y);
+        public void drive(double move, double rotate) {
+            robotDrive.arcadeDrive(move, rotate);
         }
         /*
             Three cases: above target, below target, and completely off target
