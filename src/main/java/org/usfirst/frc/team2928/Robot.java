@@ -23,13 +23,13 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
-        gearmanipulator = new GearManipulator();
+        //gearmanipulator = new GearManipulator();
         visiontracking = new VisionTracking();
         oi = new OperatorInterface();
-        ropeclimber = new RopeClimber();
-        shooter = new Shooter();
-        shifter = new Shifter();
-        intake = new Intake();
+        //ropeclimber = new RopeClimber();
+        //shooter = new Shooter();
+        //shifter = new Shifter();
+        //intake = new Intake();
     }
 
     @Override

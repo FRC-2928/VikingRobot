@@ -15,7 +15,7 @@ public class Shifter extends Subsystem {
 
     public Shifter(){
         leftSolenoid = new Solenoid(LEFT_SHIFT_PORT);
-        rightSolenoid= new Solenoid(RIGHT_SHIFT_PORT);
+        rightSolenoid = new Solenoid(RIGHT_SHIFT_PORT);
     }
 
     //Sets the shift up

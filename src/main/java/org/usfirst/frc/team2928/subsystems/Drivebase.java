@@ -9,82 +9,87 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * The drive system on the test platform consists of one motor.
- */
 public class Drivebase extends Subsystem {
 
-    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 14;
-    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 15;
-    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 1;
-    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
+    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 15;
+    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 0;
+    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 14;
+    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 1;
     private static final int MAX_FIELD_OF_VIEW = 30;
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     private final RobotDrive robotDrive;
 
-    public Drivebase() {
-        super();
-        robotDrive = new RobotDrive(FRONT_LEFT_MOTOR_DEVICE_NUMBER, FRONT_RIGHT_MOTOR_DEVICE_NUMBER, BACK_LEFT_MOTOR_DEVICE_NUMBER, BACK_RIGHT_MOTOR_DEVICE_NUMBER);
-    }
-    public void drive(double x, double y) {
-        robotDrive.arcadeDrive(x,y);
-    }
-    /*
-        Three cases: above target, below target, and completely off target
-        -networkTables value: Turn right
-        +networkTables value: Turn left
-        -1,1 Rotate the robot until the input is <1 or >-1
-        An input of about .999 is MAX_FIELD_OF_VIEW degrees left of the target
-        -.999 is MAX_FIELD_OF_VIEW degrees right of the target
-        Things to code:
-        A method to convert to degrees
-        Gyro PID that takes in the degrees as the current input
-        A method that turns right until the input is > -1 or left in the opposite case
-     */
-    public boolean inRange(){
-        if ((Robot.visiontracking.getPos() < MAX_FIELD_OF_VIEW) && (Robot.visiontracking.getPos() > -MAX_FIELD_OF_VIEW)) {
-            return true;
-
+        public Drivebase() {
+            super();
+            CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
+            CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
+            CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
+            CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
+            frontLeft.setInverted(true);
+            backLeft.setInverted(true);
+            frontRight.setInverted(true);
+            backRight.setInverted(true);
+            robotDrive = new RobotDrive(frontLeft,backLeft,frontRight,backRight);
         }
-        else
-        {
-            return false;
+        public void drive(double move, double rotate) {
+            robotDrive.arcadeDrive(move, rotate);
         }
-    }
-    public void visionDrive(double angularVelocity){
-        if(inRange() == true)
-        {
-           robotDrive.arcadeDrive(angularVelocity,0);
-        }
-        else{
-            if (Robot.visiontracking.getPos() ==MAX_FIELD_OF_VIEW)
-            {
-                do{
-                    robotDrive.arcadeDrive(-.7,0);
-                }while(Robot.visiontracking.getPos()==MAX_FIELD_OF_VIEW);
+        /*
+            Three cases: above target, below target, and completely off target
+            -networkTables value: Turn right
+            +networkTables value: Turn left
+            -1,1 Rotate the robot until the input is <1 or >-1
+            An input of about .999 is MAX_FIELD_OF_VIEW degrees left of the target
+            -.999 is MAX_FIELD_OF_VIEW degrees right of the target
+            Things to code:
+            A method to convert to degrees
+            Gyro PID that takes in the degrees as the current input
+            A method that turns right until the input is > -1 or left in the opposite case
+         */
+        public boolean inRange(){
+            if ((Robot.visiontracking.getPos() < MAX_FIELD_OF_VIEW) && (Robot.visiontracking.getPos() > -MAX_FIELD_OF_VIEW)) {
+                return true;
             }
-            else if(Robot.visiontracking.getPos()==-MAX_FIELD_OF_VIEW)
+            else
             {
-                do{
-                    robotDrive.arcadeDrive(.7,0);
-                }while(Robot.visiontracking.getPos()==-MAX_FIELD_OF_VIEW);
+                return false;
             }
         }
-    }
+        //
+        public void visionDrive(double angularVelocity){
+            if(inRange() == true)
+            {
+               robotDrive.arcadeDrive(angularVelocity,0);
+            }
+            else{
+                if (Robot.visiontracking.getPos() ==MAX_FIELD_OF_VIEW)
+                {
+                    do{
+                        robotDrive.arcadeDrive(-.7,0);
+                    }while(Robot.visiontracking.getPos()==MAX_FIELD_OF_VIEW);
+                }
+                else if(Robot.visiontracking.getPos()==-MAX_FIELD_OF_VIEW)
+                {
+                    do{
+                        robotDrive.arcadeDrive(.7,0);
+                    }while(Robot.visiontracking.getPos()==-MAX_FIELD_OF_VIEW);
+                }
+            }
+        }
+        //Resets the robot's gyro
+        public void calibrateGyro() {
+            gyro.calibrate();
+            gyro.reset();
+        }
+        //Gets the changed angle from the position where the gyro was last reset.
+        public double getGyroAngle(){
+            return gyro.getAngle();
+        }
 
-    public void calibrateGyro() {
-        gyro.calibrate();
-        gyro.reset();
-    }
+        public double getEncoderVelocity(){ return 1;}
 
-    public double getGyroAngle(){
-        return gyro.getAngle();
-    }
-
-    public double getEncoderVelocity(){ return new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER).getEncVelocity();}
-
-    @Override
-    protected void initDefaultCommand() {
-        setDefaultCommand(new JoystickDrive());
-    }
+        @Override
+        protected void initDefaultCommand() {
+            setDefaultCommand(new JoystickDrive());
+        }
 }
