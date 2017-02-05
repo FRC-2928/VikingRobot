@@ -44,6 +44,7 @@ public class Drivebase extends Subsystem {
     public boolean inRange(){
         if ((Robot.visiontracking.getPos() < MAX_FIELD_OF_VIEW) && (Robot.visiontracking.getPos() > -MAX_FIELD_OF_VIEW)) {
             return true;
+
         }
         else
         {
