@@ -1,11 +1,7 @@
 package org.usfirst.frc.team2928;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.JoystickBase;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team2928.commands.CloseGearManipulator;
-import org.usfirst.frc.team2928.commands.FlipGear;
-import org.usfirst.frc.team2928.commands.OpenGearManipulator;
 import org.usfirst.frc.team2928.commands.VisionDriveCommand;
 
 public class OperatorInterface {

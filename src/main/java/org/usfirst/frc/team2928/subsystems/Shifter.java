@@ -3,9 +3,6 @@ package org.usfirst.frc.team2928.subsystems;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * Created by Viking Robotics on 2/1/2017.
- */
 public class Shifter extends Subsystem {
 
     private static final int LEFT_SHIFT_PORT = 1;

@@ -3,9 +3,6 @@ package org.usfirst.frc.team2928.subsystems;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * Created by Viking Robotics on 2/1/2017.
- */
 public class Shooter extends Subsystem {
 
     private static final int LEAD_SHOOTER_PORT = 14;

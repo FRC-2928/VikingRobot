@@ -46,7 +46,7 @@ public class Drivebase extends Subsystem {
             Gyro PID that takes in the degrees as the current input
             A method that turns right until the input is > -1 or left in the opposite case
          */
-        public boolean inRange(){
+        private boolean inRange(){
             if ((Robot.visiontracking.getPos() < MAX_FIELD_OF_VIEW) && (Robot.visiontracking.getPos() > -MAX_FIELD_OF_VIEW)) {
                 return true;
             }
@@ -57,7 +57,7 @@ public class Drivebase extends Subsystem {
         }
         //
         public void visionDrive(double angularVelocity){
-            if(inRange() == true)
+            if(inRange())
             {
                robotDrive.arcadeDrive(angularVelocity,0);
             }

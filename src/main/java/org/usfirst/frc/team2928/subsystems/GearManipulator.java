@@ -3,9 +3,6 @@ package org.usfirst.frc.team2928.subsystems;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * Created by Max on 1/28/2017.
- */
 public class GearManipulator extends Subsystem{
 
     private final int LEFT_ARM_SOLENOID_PORT = 1;
