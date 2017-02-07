@@ -31,6 +31,12 @@ public class AutoDrivebase extends Subsystem {
         backRight.changeControlMode(CANTalon.TalonControlMode.Follower);
         frontLeft.changeControlMode(CANTalon.TalonControlMode.Position);
         frontRight.changeControlMode(CANTalon.TalonControlMode.Position);
+        frontLeft.setP(1);
+        frontLeft.setI(0);
+        frontLeft.setD(0);
+        frontRight.setP(1);
+        frontRight.setI(0);
+        frontRight.setD(0);
         backLeft.set(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
         backRight.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
         frontLeft.set(0);
@@ -44,7 +50,14 @@ public class AutoDrivebase extends Subsystem {
         frontLeft.set(NUMBER_OF_REOVLUTIONS);
         frontRight.set(NUMBER_OF_REOVLUTIONS);
     }
-
+    public CANTalon getLeftTalon()
+    {
+        return frontLeft;
+    }
+    public CANTalon getRightTalon()
+    {
+        return frontRight;
+    }
     @Override
     protected void initDefaultCommand() {
 

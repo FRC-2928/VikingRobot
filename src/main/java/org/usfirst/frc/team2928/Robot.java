@@ -25,6 +25,7 @@ public class Robot extends IterativeRobot {
     public static Shooter shooter;
     public static Shifter shifter;
     public static Intake intake;
+    public static AutoDrivebase autoDrive;
     public static CommandGroup driveAuto;
     public static CommandGroup midAuto;
     public static CommandGroup leftAuto;
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
+        autoDrive = new AutoDrivebase(36);
         //gearmanipulator = new GearManipulator();
         visiontracking = new VisionTracking();
         oi = new OperatorInterface();
