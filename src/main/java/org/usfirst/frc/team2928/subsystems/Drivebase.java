@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivebase extends Subsystem {
 
-    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 15;
-    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 0;
-    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 14;
-    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 1;
+    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 14 ;
+    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 1;
+    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 15;
+    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
-    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+   // private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     private final RobotDrive robotDrive;
 
         public Drivebase() {
@@ -29,10 +29,11 @@ public class Drivebase extends Subsystem {
             backLeft.setInverted(true);
             frontRight.setInverted(true);
             backRight.setInverted(true);
-            robotDrive = new RobotDrive(frontLeft,backLeft,frontRight,backRight);
+            robotDrive = new RobotDrive(frontRight,backRight,frontLeft,backLeft);
         }
         public void drive(double move, double rotate) {
-            robotDrive.arcadeDrive(move, rotate);
+           //Wires are stupid, drive things are backwards
+            robotDrive.arcadeDrive(move, -rotate);
         }
         /*
             Three cases: above target, below target, and completely off target
@@ -78,12 +79,13 @@ public class Drivebase extends Subsystem {
         }
         //Resets the robot's gyro
         public void calibrateGyro() {
-            gyro.calibrate();
-            gyro.reset();
+     //       gyro.calibrate();
+       //     gyro.reset();
         }
         //Gets the changed angle from the position where the gyro was last reset.
         public double getGyroAngle(){
-            return gyro.getAngle();
+           // return gyro.getAngle();
+            return 0;
         }
 
         public double getEncoderVelocity(){ return 1;}

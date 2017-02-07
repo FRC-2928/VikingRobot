@@ -17,9 +17,10 @@ public class Shooter extends Subsystem {
         motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         motor.changeControlMode(CANTalon.TalonControlMode.Speed);
         follower.changeControlMode(CANTalon.TalonControlMode.Follower);
+        follower.set(LEAD_SHOOTER_PORT);
         motor.setF(0);
-        motor.setP(0);
-        motor.setI(.00001);
+        motor.setP(.00001);
+        motor.setI(0);
         motor.setD(0);
     }
 
