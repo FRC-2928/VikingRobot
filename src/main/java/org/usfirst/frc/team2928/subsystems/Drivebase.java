@@ -16,7 +16,7 @@ public class Drivebase extends Subsystem {
     private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 15;
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
-   // private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+   private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     private final RobotDrive robotDrive;
 
         public Drivebase() {
@@ -77,18 +77,22 @@ public class Drivebase extends Subsystem {
                 }
             }
         }
-        //Resets the robot's gyro
-        public void calibrateGyro() {
-     //       gyro.calibrate();
-       //     gyro.reset();
-        }
-        //Gets the changed angle from the position where the gyro was last reset.
-        public double getGyroAngle(){
-           // return gyro.getAngle();
-            return 0;
-        }
 
-        public double getEncoderVelocity(){ return 1;}
+    public void rotate(double angularVelocity){
+        robotDrive.arcadeDrive(angularVelocity, 0);
+    }
+
+    public void calibrateGyro() {
+        gyro.calibrate();
+        gyro.reset();
+    }
+
+    public double getGyroAngle(){
+        return gyro.getAngle();
+    }
+
+
+    public double getEncoderVelocity(){ return 1;}
 
         @Override
         protected void initDefaultCommand() {

@@ -1,14 +1,11 @@
 package org.usfirst.frc.team2928;
 
-import com.sun.xml.internal.bind.v2.TODO;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.usfirst.frc.team2928.commands.ConstantDrive;
-import org.usfirst.frc.team2928.commands.JoystickDrive;
-import org.usfirst.frc.team2928.commands.VisionDriveCommand;
+import org.usfirst.frc.team2928.commands.*;
 import org.usfirst.frc.team2928.subsystems.*;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -25,21 +22,37 @@ public class Robot extends IterativeRobot {
     public static Shooter shooter;
     public static Shifter shifter;
     public static Intake intake;
-    public static AutoDrivebase autoDrive;
     public static CommandGroup driveAuto;
     public static CommandGroup midAuto;
     public static CommandGroup leftAuto;
     public static CommandGroup rightAuto;
-    //TODO: add to these command groups to make the robot do anything during auto.
+    //TODO: add to these command groups
+    // to make the robot do anything during auto.
     public static SendableChooser autoSelector;
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
-        autoDrive = new AutoDrivebase(36);
         //gearmanipulator = new GearManipulator();
         visiontracking = new VisionTracking();
         oi = new OperatorInterface();
         driveAuto = new CommandGroup();
+        driveAuto.addSequential(new AutoDriveCommand());
+        midAuto = new CommandGroup();
+        midAuto.addSequential(new AutoDriveCommand());
+        midAuto.addSequential(new VisionDriveCommand());
+        midAuto.addSequential(new OpenGearManipulator());
+        leftAuto = new CommandGroup();
+        leftAuto.addSequential(new AutoDriveCommand());
+        leftAuto.addSequential(new RotateCommand(45));
+        leftAuto.addSequential(new AutoDriveCommand());
+        leftAuto.addSequential(new VisionDriveCommand());
+        leftAuto.addSequential(new OpenGearManipulator());
+        rightAuto = new CommandGroup();
+        rightAuto.addSequential(new AutoDriveCommand());
+        rightAuto.addSequential(new RotateCommand(-45));
+        rightAuto.addSequential(new AutoDriveCommand());
+        rightAuto.addSequential(new VisionDriveCommand());
+        rightAuto.addSequential(new OpenGearManipulator());
         //ropeclimber = new RopeClimber();
         //shooter = new Shooter();
         //shifter = new Shifter();
