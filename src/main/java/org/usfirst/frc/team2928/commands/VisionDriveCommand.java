@@ -10,8 +10,8 @@ public class VisionDriveCommand extends PIDCommand {
         super(.5,0,0);
         requires(Robot.drivebase);
         requires(Robot.visiontracking);
-        getPIDController().setAbsoluteTolerance(0.1);
-        getPIDController().setOutputRange(-.6,.6);
+        getPIDController().setAbsoluteTolerance(0.25);
+        getPIDController().setOutputRange(-.5,.5);
         getPIDController().setSetpoint(0);
     }
 
@@ -22,7 +22,7 @@ public class VisionDriveCommand extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        Robot.drivebase.drive(-(Math.abs(output - 0.2)-0.4),0);
+        Robot.drivebase.drive(-output,0);
     }
 
     protected void execute() {
@@ -32,6 +32,11 @@ public class VisionDriveCommand extends PIDCommand {
             getPIDController().disable();
             Robot.drivebase.drive(Robot.oi.getDriveX(),Robot.oi.getDriveY());
         }
+    }
+
+    @Override
+    protected void end() {
+        Robot.drivebase.stop();
     }
 
     protected boolean isFinished() {

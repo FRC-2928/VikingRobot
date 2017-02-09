@@ -2,6 +2,7 @@ package org.usfirst.frc.team2928.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.commands.VisionDebug;
 
 public class VisionTracking extends Subsystem{
@@ -17,6 +18,7 @@ public class VisionTracking extends Subsystem{
     }
 
     public double getPos(){
+        SmartDashboard.putNumber("Vision data", visionTable.getNumber("detectedValue",0));
         return FIELD_OF_VIEW_MULTIPLIER * visionTable.getNumber("detectedValue", 0);
     }
 

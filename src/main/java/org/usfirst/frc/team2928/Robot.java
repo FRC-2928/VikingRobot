@@ -22,6 +22,7 @@ public class Robot extends IterativeRobot {
     public static Shooter shooter;
     public static Shifter shifter;
     public static Intake intake;
+    public static AutoDrivebase autoDrive;
     public static CommandGroup driveAuto;
     public static CommandGroup midAuto;
     public static CommandGroup leftAuto;
@@ -35,7 +36,11 @@ public class Robot extends IterativeRobot {
         //gearmanipulator = new GearManipulator();
         visiontracking = new VisionTracking();
         oi = new OperatorInterface();
-        driveAuto = new CommandGroup();
+        //ropeclimber = new RopeClimber();
+        //shooter = new Shooter();
+        //shifter = new Shifter();
+        //intake = new Intake();
+       /* driveAuto = new CommandGroup();
         driveAuto.addSequential(new AutoDriveCommand());
         midAuto = new CommandGroup();
         midAuto.addSequential(new AutoDriveCommand());
@@ -52,11 +57,7 @@ public class Robot extends IterativeRobot {
         rightAuto.addSequential(new RotateCommand(-45));
         rightAuto.addSequential(new AutoDriveCommand());
         rightAuto.addSequential(new VisionDriveCommand());
-        rightAuto.addSequential(new OpenGearManipulator());
-        //ropeclimber = new RopeClimber();
-        //shooter = new Shooter();
-        //shifter = new Shifter();
-        //intake = new Intake();
+        rightAuto.addSequential(new OpenGearManipulator());*/
         autoSelector = new SendableChooser();
         autoSelector.addDefault("Drive foward", driveAuto);
         autoSelector.addObject("Middle Gear Autonomous",midAuto);

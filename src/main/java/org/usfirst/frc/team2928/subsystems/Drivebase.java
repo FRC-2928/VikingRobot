@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivebase extends Subsystem {
 
-    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 14 ;
-    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 1;
-    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 15;
-    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
+    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 15 ;
+    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 0;
+    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 14;
+    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 1;
     private static final int MAX_FIELD_OF_VIEW = 30;
    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     private final RobotDrive robotDrive;
@@ -33,7 +33,10 @@ public class Drivebase extends Subsystem {
         }
         public void drive(double move, double rotate) {
            //Wires are stupid, drive things are backwards
-            robotDrive.arcadeDrive(move, -rotate);
+            robotDrive.arcadeDrive(-move, -rotate);
+        }
+        public void stop(){
+            robotDrive.arcadeDrive(0,0);
         }
         /*
             Three cases: above target, below target, and completely off target
