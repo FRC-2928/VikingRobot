@@ -3,6 +3,7 @@ package org.usfirst.frc.team2928;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import org.usfirst.frc.team2928.commands.*;
 import org.usfirst.frc.team2928.subsystems.*;
@@ -36,28 +37,14 @@ public class Robot extends IterativeRobot {
         //gearmanipulator = new GearManipulator();
         visiontracking = new VisionTracking();
         oi = new OperatorInterface();
+        driveAuto = new DriveCommandGroup();
+        leftAuto = new LeftGearCommandGroup();
+        midAuto = new LeftGearCommandGroup();
+
         //ropeclimber = new RopeClimber();
         //shooter = new Shooter();
         //shifter = new Shifter();
         //intake = new Intake();
-       /* driveAuto = new CommandGroup();
-        driveAuto.addSequential(new AutoDriveCommand());
-        midAuto = new CommandGroup();
-        midAuto.addSequential(new AutoDriveCommand());
-        midAuto.addSequential(new VisionDriveCommand());
-        midAuto.addSequential(new OpenGearManipulator());
-        leftAuto = new CommandGroup();
-        leftAuto.addSequential(new AutoDriveCommand());
-        leftAuto.addSequential(new RotateCommand(45));
-        leftAuto.addSequential(new AutoDriveCommand());
-        leftAuto.addSequential(new VisionDriveCommand());
-        leftAuto.addSequential(new OpenGearManipulator());
-        rightAuto = new CommandGroup();
-        rightAuto.addSequential(new AutoDriveCommand());
-        rightAuto.addSequential(new RotateCommand(-45));
-        rightAuto.addSequential(new AutoDriveCommand());
-        rightAuto.addSequential(new VisionDriveCommand());
-        rightAuto.addSequential(new OpenGearManipulator());*/
         autoSelector = new SendableChooser();
         autoSelector.addDefault("Drive foward", driveAuto);
         autoSelector.addObject("Middle Gear Autonomous",midAuto);
