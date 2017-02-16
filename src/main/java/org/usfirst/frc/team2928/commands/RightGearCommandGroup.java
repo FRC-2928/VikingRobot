@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightGearCommandGroup extends CommandGroup {
   private static  final CommandGroup rightAuto = new CommandGroup();
   public RightGearCommandGroup() {
-      rightAuto.addSequential(new AutoDriveCommand());
-      rightAuto.addSequential(new RotateCommand(-45));
-      rightAuto.addSequential(new AutoDriveCommand());
+      rightAuto.addSequential(new AutoDriveCommand(183.5));
+      rightAuto.addSequential(new RotateCommand(-90));
       rightAuto.addSequential(new VisionDriveCommand());
+      rightAuto.addSequential(new AutoDriveCommand(69));
       rightAuto.addSequential(new OpenGearManipulator());
   }
 }

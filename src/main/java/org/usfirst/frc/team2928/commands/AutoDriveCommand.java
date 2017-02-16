@@ -7,13 +7,21 @@ import org.usfirst.frc.team2928.Robot;
  * Created by Viking Robotics on 2/6/2017.
  */
 public class AutoDriveCommand extends Command {
-    public AutoDriveCommand(){
+    double setInches;
+
+    public AutoDriveCommand(double setInches){
+        this.setInches = setInches;
         requires(Robot.autoDrive);
     }
 
     @Override
     protected void execute() {
-        Robot.autoDrive.setSetpoint();
+
+    }
+
+    @Override
+    protected void initialize(){
+        Robot.autoDrive.setSetpoint(setInches);
     }
 
     @Override

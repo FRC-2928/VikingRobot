@@ -19,7 +19,7 @@ public class AutoDrivebase extends Subsystem {
     private CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
     private CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
 
-    public AutoDrivebase(double distanceInInches){
+    public AutoDrivebase(){
 
         frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -43,10 +43,11 @@ public class AutoDrivebase extends Subsystem {
         frontRight.set(0);
         frontLeft.configEncoderCodesPerRev(360);
         frontRight.configEncoderCodesPerRev(360);
-        NUMBER_OF_REOVLUTIONS = distanceInInches/(Math.PI * 6.0);
+
 
     }
-    public void setSetpoint(){
+    public void setSetpoint(double distanceInInches){
+        NUMBER_OF_REOVLUTIONS = distanceInInches/(Math.PI * 6.0);
         frontLeft.set(NUMBER_OF_REOVLUTIONS);
         frontRight.set(NUMBER_OF_REOVLUTIONS);
     }

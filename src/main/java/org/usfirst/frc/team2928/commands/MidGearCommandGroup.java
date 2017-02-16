@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MidGearCommandGroup extends CommandGroup {
     private static final CommandGroup midAuto = new CommandGroup();
     public MidGearCommandGroup(){
-        midAuto.addSequential(new AutoDriveCommand());
+        midAuto.addSequential(new AutoDriveCommand(92));
         midAuto.addSequential(new VisionDriveCommand());
         midAuto.addSequential(new OpenGearManipulator());
     }
