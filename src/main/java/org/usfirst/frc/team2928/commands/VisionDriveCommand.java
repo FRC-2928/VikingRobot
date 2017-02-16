@@ -38,7 +38,7 @@ public class VisionDriveCommand extends PIDCommand {
 
     @Override
     protected void end() {
-        Robot.drivebase.stop();
+        //Robot.drivebase.stop();
     }
 
     protected boolean isFinished() {

@@ -1,15 +1,11 @@
 package org.usfirst.frc.team2928;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.usfirst.frc.team2928.commands.ConstantDrive;
-import org.usfirst.frc.team2928.commands.JoystickDrive;
-import org.usfirst.frc.team2928.commands.VisionDriveCommand;
-import org.usfirst.frc.team2928.subsystems.*;
-
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import org.usfirst.frc.team2928.subsystems.*;
 
 /**
  * Robot for 2017.
@@ -34,7 +30,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         drivebase = new Drivebase();
-        autoDrive = new AutoDrivebase(36);
+        autoDrive = new AutoDrivebase();
         //gearmanipulator = new GearManipulator();
         visiontracking = new VisionTracking();
         oi = new OperatorInterface();

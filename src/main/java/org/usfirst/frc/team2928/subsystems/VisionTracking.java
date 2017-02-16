@@ -22,7 +22,7 @@ public class VisionTracking extends Subsystem{
     }
 
     public double getPos(){
-        return FIELD_OF_VIEW_MULTIPLIER * (visionTable.getNumber("detectedValueLeft", 0) + (visionTable.getNumber("detectedValueRight", 0) / ((this.getLockedLeft() ? 1 : 0) + (this.getLockedRight() ? 1 : 0))));
+        return FIELD_OF_VIEW_MULTIPLIER * (visionTable.getNumber("detectedValueLeft", 0) + (visionTable.getNumber("detectedValueRight", 0) / ((this.getLockedLeft() & this.getLockedRight()) ? 2 : 1)));
     }
 
     @Override
