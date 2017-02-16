@@ -2,6 +2,7 @@ package org.usfirst.frc.team2928;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team2928.commands.AutoDriveCommand;
 import org.usfirst.frc.team2928.commands.VisionDriveCommand;
 
 public class OperatorInterface {
@@ -14,6 +15,7 @@ public class OperatorInterface {
 
     private final Joystick driveStick;
     private final JoystickButton trackButton;
+    private final JoystickButton driveButton;
     /*private final JoystickButton flipButtion;
     private final JoystickButton openButton;
     private final JoystickButton closeButton;
@@ -22,6 +24,9 @@ public class OperatorInterface {
         driveStick = new Joystick(DRIVE_JOYSTICK_PORT);
         trackButton = new JoystickButton(driveStick,1);
         trackButton.whileHeld(new VisionDriveCommand());
+        driveButton = new JoystickButton(driveStick,2);
+        driveButton.whileHeld(new AutoDriveCommand());
+
 
         /*flipButtion = new JoystickButton(driveStick,FLIP_BUTTON_PORT);
         flipButtion.whileHeld(new FlipGear());

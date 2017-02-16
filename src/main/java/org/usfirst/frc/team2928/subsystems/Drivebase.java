@@ -17,18 +17,16 @@ public class Drivebase extends Subsystem {
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
    // private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+   CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
+    CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
+    CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
+    CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
     private final RobotDrive robotDrive;
 
         public Drivebase() {
             super();
-            CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
-            CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
-            CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
-            CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
-            frontLeft.setInverted(true);
-            backLeft.setInverted(true);
-            frontRight.setInverted(true);
-            backRight.setInverted(true);
+          invertDrive();
+
             robotDrive = new RobotDrive(frontRight,backRight,frontLeft,backLeft);
         }
         public void drive(double move, double rotate) {
@@ -89,6 +87,19 @@ public class Drivebase extends Subsystem {
         }
 
         public double getEncoderVelocity(){ return 1;}
+
+        public void uninvertDrive(){
+            frontLeft.setInverted(false);
+            backLeft.setInverted(false);
+            frontRight.setInverted(false);
+            backRight.setInverted(false);
+        }
+        public void invertDrive(){
+            frontLeft.setInverted(true);
+            backLeft.setInverted(true);
+            frontRight.setInverted(true);
+            backRight.setInverted(true);
+        }
 
         @Override
         protected void initDefaultCommand() {

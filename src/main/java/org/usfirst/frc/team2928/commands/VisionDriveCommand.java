@@ -26,7 +26,7 @@ public class VisionDriveCommand extends PIDCommand {
     }
 
     protected void execute() {
-        if (Robot.visiontracking.getLocked()) {
+        if (Robot.visiontracking.getLockedLeft() || Robot.visiontracking.getLockedRight()) {
             getPIDController().enable();
         } else {
             getPIDController().disable();

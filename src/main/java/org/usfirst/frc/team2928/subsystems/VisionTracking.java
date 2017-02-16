@@ -10,14 +10,19 @@ public class VisionTracking extends Subsystem{
 
     public VisionTracking(){
         visionTable = NetworkTable.getTable("VisionControl");
+
         FIELD_OF_VIEW_MULTIPLIER = 30;
     }
-    public boolean getLocked(){
-        return visionTable.getBoolean("targetLocked",false);
+    public boolean getLockedLeft(){
+        return visionTable.getBoolean("targetLockedLeft", false);
+    }
+
+    public boolean getLockedRight(){
+        return visionTable.getBoolean("targetLockedRight", false);
     }
 
     public double getPos(){
-        return FIELD_OF_VIEW_MULTIPLIER * visionTable.getNumber("detectedValue", 0);
+        return FIELD_OF_VIEW_MULTIPLIER * (visionTable.getNumber("detectedValueLeft", 0) + (visionTable.getNumber("detectedValueRight", 0) / ((this.getLockedLeft() ? 1 : 0) + (this.getLockedRight() ? 1 : 0))));
     }
 
     @Override

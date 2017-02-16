@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class AutoDrivebase extends Subsystem {
 
-    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 14 ;
-    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 1;
-    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 15;
-    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
+    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 15 ; //practice 14
+    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 0; //practice 1
+    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 14; //practice 15
+    private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 1; //practice 2
     private static  double NUMBER_OF_REOVLUTIONS = 0;
     private CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
     private CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);

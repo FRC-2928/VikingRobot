@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2928;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
