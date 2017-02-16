@@ -15,7 +15,7 @@ public class OperatorInterface {
 
     private final Joystick driveStick;
     private final JoystickButton trackButton;
-    private final JoystickButton driveButton;
+  //  private final JoystickButton driveButton;
     /*private final JoystickButton flipButtion;
     private final JoystickButton openButton;
     private final JoystickButton closeButton;
@@ -24,8 +24,8 @@ public class OperatorInterface {
         driveStick = new Joystick(DRIVE_JOYSTICK_PORT);
         trackButton = new JoystickButton(driveStick,1);
         trackButton.whileHeld(new VisionDriveCommand());
-        driveButton = new JoystickButton(driveStick,2);
-        driveButton.whileHeld(new AutoDriveCommand());
+        //driveButton = new JoystickButton(driveStick,2);
+        //driveButton.whileHeld(new AutoDriveCommand(12));
 
 
         /*flipButtion = new JoystickButton(driveStick,FLIP_BUTTON_PORT);
@@ -39,6 +39,6 @@ public class OperatorInterface {
     public double getDriveY() {
         return -driveStick.getY();
     }
-    public double getDriveX(){return driveStick.getX();}
+    public double getDriveX(){return -driveStick.getX();}
 
 }
