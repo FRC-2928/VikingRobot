@@ -14,7 +14,7 @@ public class VisionDriveCommand extends PIDCommand {
         getPIDController().setAbsoluteTolerance(0.25);
         getPIDController().setOutputRange(-.5,.5);
         getPIDController().setSetpoint(0);
-        LiveWindow.addSensor("Drivebase", "Vision PID Controller", getPIDController());
+        LiveWindow.addActuator("Drivebase", "Vision PID Controller", getPIDController());
     }
 
     @Override

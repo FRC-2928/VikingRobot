@@ -1,13 +1,10 @@
 package org.usfirst.frc.team2928.subsystems;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2928.Robot;
 import org.usfirst.frc.team2928.commands.JoystickDrive;
-
-import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivebase extends Subsystem {
 
@@ -32,6 +29,10 @@ public class Drivebase extends Subsystem {
         public void drive(double move, double rotate) {
            //Wires are stupid, drive things are backwards
             robotDrive.arcadeDrive(move, -rotate);
+        }
+        public void rotate(double angularVelocity)
+        {
+            robotDrive.arcadeDrive(angularVelocity,0);
         }
         /*
             Three cases: above target, below target, and completely off target

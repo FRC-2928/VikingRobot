@@ -1,9 +1,8 @@
 package org.usfirst.frc.team2928.commands;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2928.Robot;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 public class RotateCommand extends PIDCommand {
 
@@ -13,6 +12,7 @@ public class RotateCommand extends PIDCommand {
         getPIDController().setAbsoluteTolerance(1);
         getPIDController().setOutputRange(-.6,.6);
         setSetpoint(setpoint);
+        LiveWindow.addActuator("Drivebase", "Rotate PID Controller", getPIDController());
     }
 
     @Override
