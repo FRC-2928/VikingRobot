@@ -14,6 +14,14 @@ public class Shoot extends Command {
     protected void execute() {
         double targetSpeed = Robot.oi.getDriveY() * 1500;
         Robot.shooter.setSetpoint(targetSpeed);
+        if((Robot.shooter.getVelocity() > targetSpeed-100)||Robot.shooter.getVelocity()<targetSpeed+100)
+        {
+            Robot.shooter.agitate();
+        }
+        else
+        {
+            Robot.shooter.stopAgitation();
+        }
     }
 
 

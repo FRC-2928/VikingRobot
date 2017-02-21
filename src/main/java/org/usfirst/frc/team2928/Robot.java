@@ -1,10 +1,12 @@
 package org.usfirst.frc.team2928;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import org.usfirst.frc.team2928.commands.JoystickDrive;
 import org.usfirst.frc.team2928.subsystems.*;
 
 /**
@@ -12,43 +14,47 @@ import org.usfirst.frc.team2928.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 
-    public static Drivebase drivebase;
+    public static Drivebase drivebase =  new Drivebase();
     public static OperatorInterface oi;
-    public static GearManipulator gearmanipulator;
+    public static GearManipulator gearmanipulator = new GearManipulator();
     public static VisionTracking visiontracking;
-    public static RopeClimber ropeclimber;
-    public static Shooter shooter;
-    public static Shifter shifter;
-    public static Intake intake;
-    public static AutoDrivebase autoDrive;
+    public static RopeClimber ropeclimber = new RopeClimber();
+    public static Shooter  shooter = new Shooter();
+    public static Shifter   shifter = new Shifter();
+    public static Intake intake = new Intake();
+   public static AutoDrivebase autoDrive  = new AutoDrivebase();
     public static CommandGroup driveAuto;
     public static CommandGroup midAuto;
     public static CommandGroup leftAuto;
     public static CommandGroup rightAuto;
     //TODO: add to these command groups to make the robot do anything during auto.
     public static SendableChooser autoSelector;
+    public static Compressor   compressor = new Compressor();
     @Override
     public void robotInit() {
-        drivebase = new Drivebase();
-        autoDrive = new AutoDrivebase();
-        //gearmanipulator = new GearManipulator();
-        visiontracking = new VisionTracking();
-        oi = new OperatorInterface();
+
+
+
+        compressor.start();
+
+
         driveAuto = new CommandGroup();
-        //ropeclimber = new RopeClimber();
-        //shooter = new Shooter();
-        //shifter = new Shifter();
-        //intake = new Intake();
+
+         visiontracking = new VisionTracking();
+
         autoSelector = new SendableChooser();
-        autoSelector.addDefault("Drive foward", driveAuto);
+        autoSelector.addDefault("Drive Forward", driveAuto);
         autoSelector.addObject("Middle Gear Autonomous",midAuto);
         autoSelector.addObject("Left Gear Autonomous", leftAuto);
         autoSelector.addObject("Right Gear Autonomous", rightAuto);
+        //created this last for ordering issues
+        oi = new OperatorInterface();
     }
 
     @Override
     public void teleopInit() {
-        Scheduler.getInstance().removeAll();
+
+        Scheduler.getInstance().add(new JoystickDrive());
     }
 
     @Override

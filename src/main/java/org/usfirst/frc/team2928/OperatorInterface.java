@@ -2,38 +2,55 @@ package org.usfirst.frc.team2928;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team2928.commands.AutoDriveCommand;
-import org.usfirst.frc.team2928.commands.VisionDriveCommand;
+import org.usfirst.frc.team2928.commands.*;
 
 public class OperatorInterface {
 
     // TODO: Determine proper port for joystick/buttons
     private static final int DRIVE_JOYSTICK_PORT = 0;
-    private static final int FLIP_BUTTON_PORT = 2;
+    private static final int OPERATOR_STICK_PORT = 1;
+    private static final int FLIP_OUT_BUTTON_PORT = 1;
+    private static final int FLIP_IN_BUTTON_PORT = 2;
     private static final int OPEN_GEAR_MANIPULATOR_PORT = 3;
     private static final int CLOSE_GEAR_MANIPULATOR_PORT = 4;
+    private static final int CLIMB_BUTTON = 9;
+    private static final  int TRACKING_BUTTON = 1;
+    private static final int SHOOTING_BUTTON = 5;
+    private static final int INTAKE_BUTTON = 8;
+    private static final int SHIFT_DOWN_BUTTON = 9;
+
 
     private final Joystick driveStick;
+    private final Joystick opStick;
     private final JoystickButton trackButton;
-  //  private final JoystickButton driveButton;
-    /*private final JoystickButton flipButtion;
+    private final JoystickButton climbButton;
+    private final JoystickButton flipOutButton;
     private final JoystickButton openButton;
     private final JoystickButton closeButton;
-*/
+    private final JoystickButton flipInButton;
+    private final JoystickButton intakeButton;
+    private final JoystickButton shiftButton;
+
     public OperatorInterface() {
         driveStick = new Joystick(DRIVE_JOYSTICK_PORT);
-        trackButton = new JoystickButton(driveStick,1);
+        opStick = new Joystick(OPERATOR_STICK_PORT);
+        trackButton = new JoystickButton(driveStick,TRACKING_BUTTON);
         trackButton.whileHeld(new VisionDriveCommand());
-        //driveButton = new JoystickButton(driveStick,2);
-        //driveButton.whileHeld(new AutoDriveCommand(12));
-
-
-        /*flipButtion = new JoystickButton(driveStick,FLIP_BUTTON_PORT);
-        flipButtion.whileHeld(new FlipGear());
-        openButton = new JoystickButton(driveStick,OPEN_GEAR_MANIPULATOR_PORT);
+        climbButton = new JoystickButton(opStick,CLIMB_BUTTON);
+        climbButton.whileHeld(new ClimbUp());
+        flipOutButton = new JoystickButton(opStick,FLIP_OUT_BUTTON_PORT);
+        flipOutButton.whileHeld(new FlipGear());
+        openButton = new JoystickButton(opStick,OPEN_GEAR_MANIPULATOR_PORT);
         openButton.whenPressed(new OpenGearManipulator());
-        closeButton = new JoystickButton(driveStick,CLOSE_GEAR_MANIPULATOR_PORT);
-        closeButton.whenPressed(new CloseGearManipulator());*/
+        closeButton = new JoystickButton(opStick,CLOSE_GEAR_MANIPULATOR_PORT);
+        closeButton.whenPressed(new CloseGearManipulator());
+        flipInButton = new JoystickButton(opStick, FLIP_IN_BUTTON_PORT);
+        flipInButton.whenPressed(new CloseGearManipulator());
+        intakeButton = new JoystickButton(opStick, INTAKE_BUTTON);
+        intakeButton.whenPressed(new IntakeCommand());
+        shiftButton = new JoystickButton(opStick, SHIFT_DOWN_BUTTON);
+        shiftButton.whileHeld(new ShiftDown());
+        shiftButton.whenInactive(new ShiftUp());
     }
 
     public double getDriveY() {

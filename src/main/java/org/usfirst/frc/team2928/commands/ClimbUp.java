@@ -6,16 +6,20 @@ import org.usfirst.frc.team2928.Robot;
 public class ClimbUp extends Command{
 
     public ClimbUp(){
-        super();
         requires(Robot.ropeclimber);
     }
 
     @Override
-    protected void initialize(){
-        Robot.ropeclimber.drive(1);
+    protected  void execute(){
+        Robot.ropeclimber.drive(-.7);
+    }
+    @Override
+    protected void end(){
+        Robot.ropeclimber.drive(0);
     }
 
-    protected void end(){
+    @Override
+    protected void interrupted() {
         Robot.ropeclimber.drive(0);
     }
 

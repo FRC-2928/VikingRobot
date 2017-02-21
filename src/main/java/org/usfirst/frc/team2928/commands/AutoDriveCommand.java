@@ -7,11 +7,11 @@ import org.usfirst.frc.team2928.Robot;
  * Created by Viking Robotics on 2/6/2017.
  */
 public class AutoDriveCommand extends Command {
-    double setInches;
+    private double setInches;
 
     public AutoDriveCommand(double setInches){
         this.setInches = setInches;
-        requires(Robot.autoDrive);
+        requires(Robot.drivebase);
     }
 
     @Override
@@ -21,11 +21,12 @@ public class AutoDriveCommand extends Command {
 
     @Override
     protected void initialize(){
-        Robot.autoDrive.setSetpoint(setInches);
-    }
+        Robot.drivebase.autoDriveSetup();
+        Robot.drivebase.setSetpoint(setInches);
+    } 
 
     @Override
     protected boolean isFinished() {
-        return (Robot.autoDrive.getLeftTalon().getClosedLoopError()<.5)&&(Robot.autoDrive.getRightTalon().getClosedLoopError()<.5);
+        return (Robot.drivebase.getLeftTalon().getClosedLoopError()<.5)&&(Robot.drivebase.getRightTalon().getClosedLoopError()<.5);
     }
 }
