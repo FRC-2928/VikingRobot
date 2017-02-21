@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class RopeClimber extends Subsystem{
 
-    private final int MOTOR_DEVICE_NUMBER = 15;
+    private final int MOTOR_DEVICE_NUMBER = 10;
 
     private final CANTalon motor;
 
