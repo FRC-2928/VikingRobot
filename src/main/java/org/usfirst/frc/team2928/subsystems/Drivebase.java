@@ -8,9 +8,9 @@ import org.usfirst.frc.team2928.commands.JoystickDrive;
 
 public class Drivebase extends Subsystem {
 
-    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 14 ;
-    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 1;
-    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 15;
+    private static final int FRONT_LEFT_MOTOR_DEVICE_NUMBER = 0 ;
+    private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 3;
+    private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 1;
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
    // private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();

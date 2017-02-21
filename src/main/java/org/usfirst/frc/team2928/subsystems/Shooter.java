@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
 
-    private static final int LEAD_SHOOTER_PORT = 14;
-    private static final int FOLLOWER_SHOOTER_PORT = 15;
+    private static final int LEAD_SHOOTER_PORT = 7;
+    private static final int FOLLOWER_SHOOTER_PORT = 6;
 
     private final CANTalon motor;
 
