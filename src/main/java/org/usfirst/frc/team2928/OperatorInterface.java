@@ -16,7 +16,7 @@ public class OperatorInterface {
     private static final int CLIMB_BUTTON = 9;
     private static final  int TRACKING_BUTTON = 1;
     private static final int SHOOTING_BUTTON = 5;
-    private static final int INTAKE_BUTTON = 8;
+    private static final int INTAKE_BUTTON_PORT = 8;
     private static final int SHIFT_DOWN_BUTTON = 9;
 
 
@@ -30,6 +30,7 @@ public class OperatorInterface {
     private final JoystickButton flipInButton;
     private final JoystickButton intakeButton;
     private final JoystickButton shiftButton;
+    private final JoystickButton shootButton;
 
     public OperatorInterface() {
         driveStick = new Joystick(DRIVE_JOYSTICK_PORT);
@@ -39,18 +40,20 @@ public class OperatorInterface {
         climbButton = new JoystickButton(opStick,CLIMB_BUTTON);
         climbButton.whileHeld(new ClimbUp());
         flipOutButton = new JoystickButton(opStick,FLIP_OUT_BUTTON_PORT);
-        flipOutButton.whileHeld(new FlipGear());
+        flipOutButton.whenPressed(new FlipGear(true));
         openButton = new JoystickButton(opStick,OPEN_GEAR_MANIPULATOR_PORT);
         openButton.whenPressed(new OpenGearManipulator());
         closeButton = new JoystickButton(opStick,CLOSE_GEAR_MANIPULATOR_PORT);
         closeButton.whenPressed(new CloseGearManipulator());
         flipInButton = new JoystickButton(opStick, FLIP_IN_BUTTON_PORT);
-        flipInButton.whenPressed(new CloseGearManipulator());
-        intakeButton = new JoystickButton(opStick, INTAKE_BUTTON);
-        intakeButton.whenPressed(new IntakeCommand());
-        shiftButton = new JoystickButton(opStick, SHIFT_DOWN_BUTTON);
+        flipInButton.whenPressed(new FlipGear(false));
+        intakeButton = new JoystickButton(opStick, INTAKE_BUTTON_PORT);
+        intakeButton.whileHeld(new IntakeCommand());
+        shiftButton = new JoystickButton(driveStick, SHIFT_DOWN_BUTTON);
         shiftButton.whileHeld(new ShiftDown());
         shiftButton.whenInactive(new ShiftUp());
+        shootButton = new JoystickButton(opStick,SHOOTING_BUTTON);
+        shootButton.whileHeld(new Shoot());
     }
 
     public double getDriveY() {

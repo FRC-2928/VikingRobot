@@ -4,24 +4,25 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2928.Robot;
 
 public class FlipGear extends Command{
-
-    public FlipGear(){
+    private boolean fliperUp;
+    public FlipGear(boolean up){
         super();
         requires(Robot.gearmanipulator);
+        fliperUp = up;
     }
 
     @Override
     protected void initialize(){
-        Robot.gearmanipulator.flipUp();
-    }
-
-    @Override
-    protected void end(){
-        Robot.gearmanipulator.flipDown();
+        if(fliperUp) {
+            Robot.gearmanipulator.flipUp();
+        }
+        else {
+            Robot.gearmanipulator.flipDown();
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 }

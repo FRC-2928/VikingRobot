@@ -13,6 +13,7 @@ public class VisionDebug extends Command{
 
     protected void execute(){
         SmartDashboard.putBoolean("Right Camera Locked", Robot.visiontracking.getLockedRight());
+        SmartDashboard.putBoolean("Left Camera Locked", Robot.visiontracking.getLockedLeft());
     }
 
     @Override

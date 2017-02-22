@@ -23,17 +23,15 @@ public class GearManipulator extends Subsystem{
 
     }
     public void close(){
-        closed = true;
-        arm.set(true);
-    }
-    public void open(){
         closed = false;
         arm.set(false);
     }
+    public void open(){
+        closed = true;
+        arm.set(true);
+    }
     public void flipUp(){
-        if(closed){
-            flipper.set(true);
-        }
+        flipper.set(true);
     }
     public void flipDown(){
         flipper.set(false);

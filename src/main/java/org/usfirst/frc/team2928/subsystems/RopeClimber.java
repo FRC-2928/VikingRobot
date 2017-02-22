@@ -15,7 +15,7 @@ public class RopeClimber extends Subsystem{
     }
 
     public void drive(final double input) {
-        motor.set(input);
+        motor.set(-input);
     }
 
     @Override

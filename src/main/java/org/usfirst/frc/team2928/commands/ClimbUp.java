@@ -11,7 +11,7 @@ public class ClimbUp extends Command{
 
     @Override
     protected  void execute(){
-        Robot.ropeclimber.drive(-.7);
+        Robot.ropeclimber.drive(.7);
     }
     @Override
     protected void end(){

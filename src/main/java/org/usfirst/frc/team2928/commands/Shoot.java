@@ -1,30 +1,39 @@
 package org.usfirst.frc.team2928.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.Robot;
 
 public class Shoot extends Command {
     public Shoot(){
         super();
         requires(Robot.shooter);
+        requires(Robot.gearmanipulator);
     }
+ @Override
+    protected void initialize()
+    {
+        Robot.gearmanipulator.flipDown();
+    }
+
 
 
     @Override
     protected void execute() {
-        double targetSpeed = Robot.oi.getDriveY() * 1500;
-        Robot.shooter.setSetpoint(targetSpeed);
-        if((Robot.shooter.getVelocity() > targetSpeed-100)||Robot.shooter.getVelocity()<targetSpeed+100)
-        {
+        double targetSpeed = .75* 1500;
+        Robot.shooter.setSetpoint(.75*1500);
+        SmartDashboard.putNumber("Setpoint Set",targetSpeed);
+
             Robot.shooter.agitate();
-        }
-        else
-        {
-            Robot.shooter.stopAgitation();
-        }
+
+
     }
 
-
+    @Override
+    protected void interrupted() {
+        Robot.shooter.stopMotor();
+        Robot.shooter.stopAgitation();
+    }
 
     @Override
     protected boolean isFinished() {

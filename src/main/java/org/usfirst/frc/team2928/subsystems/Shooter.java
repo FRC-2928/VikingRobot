@@ -8,13 +8,14 @@ public class Shooter extends Subsystem {
 
     private static final int LEAD_SHOOTER_PORT = 7;
     private static final int FOLLOWER_SHOOTER_PORT = 6;
-    private static final int AGITATOR_PORT = 8;
+    private static final int AGITATOR_PORT = 0;
 
     private final CANTalon motor;
     private final Talon agitatorMotor;
     public Shooter(){
 
         motor = new CANTalon(LEAD_SHOOTER_PORT);
+        motor.setInverted(true);
         CANTalon follower = new CANTalon(FOLLOWER_SHOOTER_PORT);
         agitatorMotor = new Talon(AGITATOR_PORT);
         motor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -22,7 +23,7 @@ public class Shooter extends Subsystem {
         follower.changeControlMode(CANTalon.TalonControlMode.Follower);
         follower.set(LEAD_SHOOTER_PORT);
         motor.setF(0);
-        motor.setP(.00001);
+        motor.setP(1);
         motor.setI(0);
         motor.setD(0);
     }
@@ -30,9 +31,14 @@ public class Shooter extends Subsystem {
     {
         return motor.getEncVelocity();
     }
+    public void stopMotor()
+    {
+        motor.set(0);
+    }
+
     public void agitate()
     {
-        agitatorMotor.set(.7);
+        agitatorMotor.set(.6);
     }
     public void stopAgitation()
     {
