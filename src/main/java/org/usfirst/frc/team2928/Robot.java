@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import org.usfirst.frc.team2928.commands.AutoDriveCommand;
 import org.usfirst.frc.team2928.commands.JoystickDrive;
+import org.usfirst.frc.team2928.commands.RotateCommand;
 import org.usfirst.frc.team2928.subsystems.*;
 
 /**
@@ -65,8 +67,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
-        Command autoCommand = (Command) autoSelector.getSelected();
-        autoCommand.start();
+       /* Command autoCommand = (Command) autoSelector.getSelected();
+        autoCommand.start();*/
+      // Scheduler.getInstance().add(new AutoDriveCommand(24));
     }
 
     @Override

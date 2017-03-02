@@ -23,7 +23,7 @@ public class Shooter extends Subsystem {
         follower.changeControlMode(CANTalon.TalonControlMode.Follower);
         follower.set(LEAD_SHOOTER_PORT);
         motor.setF(0);
-        motor.setP(1);
+        motor.setP(.88);
         motor.setI(0);
         motor.setD(0);
     }

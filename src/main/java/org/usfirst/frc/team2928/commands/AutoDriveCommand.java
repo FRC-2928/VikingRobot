@@ -10,23 +10,35 @@ public class AutoDriveCommand extends Command {
     private double setInches;
 
     public AutoDriveCommand(double setInches){
-        this.setInches = setInches;
         requires(Robot.drivebase);
+        this.setInches = setInches;
+
+
     }
 
     @Override
     protected void execute() {
-
+        Robot.drivebase.setSetpoint(setInches);
     }
 
     @Override
     protected void initialize(){
         Robot.drivebase.autoDriveSetup();
-        Robot.drivebase.setSetpoint(setInches);
-    } 
+
+    }
 
     @Override
     protected boolean isFinished() {
         return (Robot.drivebase.getLeftTalon().getClosedLoopError()<.5)&&(Robot.drivebase.getRightTalon().getClosedLoopError()<.5);
+    }
+
+    @Override
+    protected void end() {
+        Robot.drivebase.newRobotDrive();
+    }
+
+    @Override
+    protected void interrupted() {
+        end();
     }
 }

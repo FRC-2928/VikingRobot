@@ -19,8 +19,8 @@ public class Drivebase extends Subsystem {
     CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
     CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
-    private double NUMBER_OF_REOVLUTIONS;
-    private final RobotDrive robotDrive;
+    //private double numberOfRevolutions;
+    private RobotDrive robotDrive;
 
         public Drivebase() {
             super();
@@ -123,16 +123,16 @@ public class Drivebase extends Subsystem {
             frontRight.setD(0);
             backLeft.set(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
             backRight.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
-            frontLeft.set(0);
-            frontRight.set(0);
+            //frontLeft.set(0);
+            //frontRight.set(0);
             frontLeft.configEncoderCodesPerRev(360);
             frontRight.configEncoderCodesPerRev(360);
 
         }
     public void setSetpoint(double distanceInInches){
-        NUMBER_OF_REOVLUTIONS = distanceInInches/(Math.PI * 6.0);
-        frontLeft.set(NUMBER_OF_REOVLUTIONS);
-        frontRight.set(NUMBER_OF_REOVLUTIONS);
+        double numberOfRevolutions = distanceInInches/(Math.PI * 6.0);
+        frontLeft.set(numberOfRevolutions);
+        frontRight.set(numberOfRevolutions);
     }
     public CANTalon getLeftTalon()
     {
@@ -142,6 +142,8 @@ public class Drivebase extends Subsystem {
     {
         return frontRight;
     }
+
+    public void newRobotDrive(){ robotDrive = new RobotDrive(frontRight,backRight,frontLeft,backLeft);}
 
         @Override
         protected void initDefaultCommand() {
