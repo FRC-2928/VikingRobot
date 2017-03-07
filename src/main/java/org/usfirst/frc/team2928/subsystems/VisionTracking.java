@@ -20,7 +20,6 @@ public class VisionTracking extends Subsystem{
     public boolean getLockedLeft(){
         return visionTable.getBoolean("targetLockedLeft", false);
     }
-
     public boolean getLockedRight(){
         return visionTable.getBoolean("targetLockedRight", false);
     }
@@ -30,7 +29,7 @@ public class VisionTracking extends Subsystem{
         visionRight = visionTable.getNumber("detectedValueRight", 0);
         SmartDashboard.putNumber("Vision Left Data", visionLeft);
         SmartDashboard.putNumber("Vision Right Data", visionRight);
-        return FIELD_OF_VIEW_MULTIPLIER * (visionLeft + visionRight) / ((this.getLockedLeft() & this.getLockedRight()) ? 2 : 1);
+        return  (visionLeft + visionRight)/2;
 
     }
 

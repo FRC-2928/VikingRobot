@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2928.subsystems;
 
 import com.ctre.CANTalon;
+import com.ctre.PigeonImu;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,6 +16,7 @@ public class Drivebase extends Subsystem {
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    private final PigeonImu newGyro = new PigeonImu(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
    CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
@@ -58,11 +60,24 @@ public class Drivebase extends Subsystem {
                 return false;
             }
         }
-        //
+        public boolean onTarget()
+        {
+            if((Robot.visiontracking.getPos()<.1)&&((Robot.visiontracking.getPos()>-.1)))
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
         public void visionDrive(double angularVelocity){
             if(inRange())
             {
                robotDrive.arcadeDrive(angularVelocity,0);
+               if(onTarget())
+               {
+                   robotDrive.arcadeDrive(0,0);
+               }
             }
             else{
                 if (Robot.visiontracking.getPos() ==MAX_FIELD_OF_VIEW)
@@ -86,8 +101,8 @@ public class Drivebase extends Subsystem {
         }
         //Gets the changed angle from the position where the gyro was last reset.
         public double getGyroAngle(){
-            return gyro.getAngle();
-
+            double [] ypr = new double[3];
+            return ypr[2];
         }
 
         public double getEncoderVelocity(){ return 1;}
@@ -104,31 +119,31 @@ public class Drivebase extends Subsystem {
             frontRight.setInverted(true);
             backRight.setInverted(true);
         }
-        public void autoDriveSetup(){
-            frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-            frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-            frontLeft.setInverted(true);
-            backLeft.setInverted(true);
-            frontRight.setInverted(true);
-            backRight.setInverted(true);
-            backLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
-            backRight.changeControlMode(CANTalon.TalonControlMode.Follower);
-            frontLeft.changeControlMode(CANTalon.TalonControlMode.Position);
-            frontRight.changeControlMode(CANTalon.TalonControlMode.Position);
-            frontLeft.setP(1);
-            frontLeft.setI(0);
-            frontLeft.setD(0);
-            frontRight.setP(1);
-            frontRight.setI(0);
-            frontRight.setD(0);
-            backLeft.set(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
-            backRight.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
-            //frontLeft.set(0);
-            //frontRight.set(0);
-            frontLeft.configEncoderCodesPerRev(360);
-            frontRight.configEncoderCodesPerRev(360);
+    public void autoDriveSetup(){
+        frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        frontLeft.setInverted(true);
+        backLeft.setInverted(true);
+        frontRight.setInverted(true);
+        backRight.setInverted(true);
+        backLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
+        backRight.changeControlMode(CANTalon.TalonControlMode.Follower);
+        frontLeft.changeControlMode(CANTalon.TalonControlMode.Position);
+        frontRight.changeControlMode(CANTalon.TalonControlMode.Position);
+        frontLeft.setP(1);
+        frontLeft.setI(0);
+        frontLeft.setD(0);
+        frontRight.setP(1);
+        frontRight.setI(0);
+        frontRight.setD(0);
+        backLeft.set(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
+        backRight.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
+        //frontLeft.set(0);
+        //frontRight.set(0);
+        frontLeft.configEncoderCodesPerRev(360);
+        frontRight.configEncoderCodesPerRev(360);
 
-        }
+    }
     public void setSetpoint(double distanceInInches){
         double numberOfRevolutions = distanceInInches/(Math.PI * 6.0);
         frontLeft.set(numberOfRevolutions);

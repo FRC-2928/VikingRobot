@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import org.usfirst.frc.team2928.commands.AutoDriveCommand;
 import org.usfirst.frc.team2928.commands.JoystickDrive;
 import org.usfirst.frc.team2928.commands.RotateCommand;
+import org.usfirst.frc.team2928.commands.VisionDriveCommand;
 import org.usfirst.frc.team2928.subsystems.*;
 
 /**
@@ -24,7 +25,7 @@ public class Robot extends IterativeRobot {
     public static Shooter  shooter = new Shooter();
     public static Shifter   shifter = new Shifter();
     public static Intake intake = new Intake();
-   public static AutoDrivebase autoDrive  = new AutoDrivebase();
+    public static AutoDrivebase autoDrive  = new AutoDrivebase();
     public static CommandGroup driveAuto;
     public static CommandGroup midAuto;
     public static CommandGroup leftAuto;
@@ -34,16 +35,9 @@ public class Robot extends IterativeRobot {
     public static Compressor   compressor = new Compressor();
     @Override
     public void robotInit() {
-
-
-
         compressor.start();
-
-
         driveAuto = new CommandGroup();
-
-         visiontracking = new VisionTracking();
-
+        visiontracking = new VisionTracking();
         autoSelector = new SendableChooser();
         autoSelector.addDefault("Drive Forward", driveAuto);
         autoSelector.addObject("Middle Gear Autonomous",midAuto);
@@ -70,6 +64,7 @@ public class Robot extends IterativeRobot {
        /* Command autoCommand = (Command) autoSelector.getSelected();
         autoCommand.start();*/
       // Scheduler.getInstance().add(new AutoDriveCommand(24));
+        Scheduler.getInstance().add(new VisionDriveCommand());
     }
 
     @Override
