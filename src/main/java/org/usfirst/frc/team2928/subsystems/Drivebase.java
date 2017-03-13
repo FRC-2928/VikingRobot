@@ -21,6 +21,7 @@ public class Drivebase extends Subsystem {
     CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
     CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
+    private double[] ypr = new double[3];
     //private double numberOfRevolutions;
     private RobotDrive robotDrive;
 
@@ -54,6 +55,7 @@ public class Drivebase extends Subsystem {
         private boolean inRange(){
             if ((Robot.visiontracking.getPos() < MAX_FIELD_OF_VIEW) && (Robot.visiontracking.getPos() > -MAX_FIELD_OF_VIEW)) {
                 return true;
+
             }
             else
             {
@@ -96,13 +98,12 @@ public class Drivebase extends Subsystem {
         }
         //Resets the robot's gyro
         public void calibrateGyro() {
-            gyro.calibrate();
-          gyro.reset();
+            newGyro.SetYaw(0);
         }
         //Gets the changed angle from the position where the gyro was last reset.
         public double getGyroAngle(){
             double [] ypr = new double[3];
-            return ypr[2];
+            return ypr[0];
         }
 
         public double getEncoderVelocity(){ return 1;}

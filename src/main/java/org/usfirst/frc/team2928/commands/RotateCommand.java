@@ -8,9 +8,9 @@ import org.usfirst.frc.team2928.Robot;
 public class RotateCommand extends PIDCommand {
 
     public RotateCommand(double setpoint) {
-        super(.05,0.0001,0);
+        super(.007,0,0);
         requires(Robot.drivebase);
-        getPIDController().setAbsoluteTolerance(8);
+        getPIDController().setAbsoluteTolerance(1);
         getPIDController().setOutputRange(-.8,.8);
         setSetpoint(setpoint);
         LiveWindow.addActuator("Drivebase", "Rotate PID Controller", getPIDController());

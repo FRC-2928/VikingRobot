@@ -15,7 +15,7 @@ public class VisionDriveCommand extends Command{
     protected void execute() {
         SmartDashboard.putNumber("Vision Position", Robot.visiontracking.getPos());
         SmartDashboard.putBoolean("On Target", Robot.drivebase.onTarget());
-        new RotateCommand(Robot.visiontracking.getPos());
+        new RotateCommand(Robot.visiontracking.getPos()).start();
 
     }
 

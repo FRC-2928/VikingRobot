@@ -17,6 +17,7 @@ public class FlipGear extends Command{
             Robot.gearmanipulator.flipUp();
         }
         else {
+            Robot.gearmanipulator.close();
             Robot.gearmanipulator.flipDown();
         }
     }
