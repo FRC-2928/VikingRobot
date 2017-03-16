@@ -17,6 +17,13 @@ public class VisionDriveCommand extends PIDCommand{
     setSetpoint(Robot.visiontracking.getPos());
 }
     int number = 0;
+
+    @Override
+    protected void execute() {
+        SmartDashboard.putNumber("New vision left", Robot.visiontracking.getVisionLeft());
+        SmartDashboard.putNumber("New vision right", Robot.visiontracking.getVisionRight());
+    }
+
     int count = 1;
     @Override
     protected void initialize(){
@@ -28,7 +35,6 @@ public class VisionDriveCommand extends PIDCommand{
 
     @Override
     protected double returnPIDInput() {
-        SmartDashboard.putNumber("Yaw", Robot.drivebase.getGyroAngle());
         return Robot.drivebase.getGyroAngle();
     }
 
@@ -42,5 +48,17 @@ public class VisionDriveCommand extends PIDCommand{
     protected boolean isFinished() {
         SmartDashboard.putBoolean("Is Finished",getPIDController().onTarget());
         return getPIDController().onTarget();
+    }
+
+    @Override
+    protected void interrupted() {
+        end();
+    }
+
+    @Override
+    protected void end() {
+
+        getPIDController().disable();
+        Robot.drivebase.drive(0,0);
     }
 }

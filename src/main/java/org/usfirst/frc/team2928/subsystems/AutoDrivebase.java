@@ -48,6 +48,9 @@ public class AutoDrivebase extends Subsystem {
     }
     public void setSetpoint(double distanceInInches){
         NUMBER_OF_REOVLUTIONS = distanceInInches/(Math.PI * 6.0);
+    }
+    public void autoDrive()
+    {
         frontLeft.set(NUMBER_OF_REOVLUTIONS);
         frontRight.set(NUMBER_OF_REOVLUTIONS);
     }

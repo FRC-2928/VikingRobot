@@ -15,9 +15,10 @@ public class FlipGear extends Command{
     protected void initialize(){
         if(fliperUp) {
             Robot.gearmanipulator.flipUp();
+            Robot.gearmanipulator.close();
         }
         else {
-            Robot.gearmanipulator.close();
+
             Robot.gearmanipulator.flipDown();
         }
     }

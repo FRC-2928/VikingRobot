@@ -17,10 +17,11 @@ public class AutoDriveCommand extends Command {
     @Override
     protected void initialize(){
         Robot.drivebase.autoDriveSetup();
+        Robot.drivebase.setSetpoint(setInches);
     }
     @Override
     protected void execute() {
-        Robot.drivebase.setSetpoint(setInches);
+       Robot.drivebase.autoDrive();
     }
     @Override
     protected boolean isFinished() {

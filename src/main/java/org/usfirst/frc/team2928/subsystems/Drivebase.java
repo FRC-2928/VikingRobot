@@ -20,7 +20,7 @@ public class Drivebase extends Subsystem {
    CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
-
+    double numberOfRevolutions;
     CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
     private PigeonImu.GeneralStatus generalStatus = new PigeonImu.GeneralStatus();
     //private double numberOfRevolutions;
@@ -133,10 +133,12 @@ public class Drivebase extends Subsystem {
         backRight.changeControlMode(CANTalon.TalonControlMode.Follower);
         backLeft.set(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
         backRight.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
-        frontLeft.setP(1);
+
+
+        frontLeft.setP(.3);
         frontLeft.setI(0);
         frontLeft.setD(0);
-        frontRight.setP(1);
+        frontRight.setP(.3);
         frontRight.setI(0);
         frontRight.setD(0);
 
@@ -145,9 +147,13 @@ public class Drivebase extends Subsystem {
 
     }
     public void setSetpoint(double distanceInInches){
-        double numberOfRevolutions = distanceInInches/(Math.PI * 6.0);
+         numberOfRevolutions = distanceInInches/(Math.PI * 4.0);
+
+    }
+    public  void autoDrive()
+    {
         frontLeft.set(numberOfRevolutions);
-        frontRight.set(numberOfRevolutions);
+        frontRight.set(-numberOfRevolutions);
     }
     public CANTalon getLeftTalon()
     {
