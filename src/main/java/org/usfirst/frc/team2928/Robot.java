@@ -67,6 +67,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().removeAll();
        /* Command autoCommand = (Command) autoSelector.getSelected();
         autoCommand.start();*/
+
       // Scheduler.getInstance().add(new AutoDriveCommand(-24));
       //  Scheduler.getInstance().add(new RotateCommand(60));
         Scheduler.getInstance().add(new AutoDriveCommand(24));
