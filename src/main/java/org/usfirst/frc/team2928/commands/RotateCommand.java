@@ -8,7 +8,7 @@ import org.usfirst.frc.team2928.Robot;
 public class RotateCommand extends PIDCommand {
 
     public RotateCommand(double setpoint) {
-        super(.007,0,0);
+        super(.0125,.008,.2);
         requires(Robot.drivebase);
         getPIDController().setAbsoluteTolerance(1);
         getPIDController().setOutputRange(-.8,.8);
@@ -27,12 +27,13 @@ public class RotateCommand extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
+        SmartDashboard.putNumber("Yaw", Robot.drivebase.getGyroAngle());
         return Robot.drivebase.getGyroAngle();
     }
 
     @Override
     protected void usePIDOutput(double output) {
-        Robot.drivebase.rotate(-output);
+        Robot.drivebase.rotate(output);
         SmartDashboard.putNumber("PID Output",output);
     }
 

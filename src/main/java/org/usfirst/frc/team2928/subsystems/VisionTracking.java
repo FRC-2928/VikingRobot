@@ -23,14 +23,14 @@ public class VisionTracking extends Subsystem{
     public boolean getLockedRight(){
         return visionTable.getBoolean("targetLockedRight", false);
     }
-
+    public double getVisionLeft(){return visionTable.getNumber("detectedValueLeft",0);}
+    public double getVisionRight(){return visionTable.getNumber("detectedValueRight",0);}
     public double getPos(){
         visionLeft = visionTable.getNumber("detectedValueLeft", 0);
         visionRight = visionTable.getNumber("detectedValueRight", 0);
         SmartDashboard.putNumber("Vision Left Data", visionLeft);
         SmartDashboard.putNumber("Vision Right Data", visionRight);
-        return  (visionLeft + visionRight)/2;
-
+       return (visionLeft + visionRight)/2;
     }
 
     @Override

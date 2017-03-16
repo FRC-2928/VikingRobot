@@ -16,12 +16,13 @@ public class Drivebase extends Subsystem {
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-    private final PigeonImu newGyro = new PigeonImu(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
+    private final PigeonImu newGyro = new PigeonImu(new CANTalon(6));
    CANTalon frontLeft = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon backLeft = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
     CANTalon frontRight = new CANTalon(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
+
     CANTalon backRight = new CANTalon(BACK_RIGHT_MOTOR_DEVICE_NUMBER);
-    private double[] ypr = new double[3];
+    private PigeonImu.GeneralStatus generalStatus = new PigeonImu.GeneralStatus();
     //private double numberOfRevolutions;
     private RobotDrive robotDrive;
 
@@ -29,12 +30,12 @@ public class Drivebase extends Subsystem {
             super();
           invertDrive();
 
-            robotDrive = new RobotDrive(frontRight,backRight,frontLeft,backLeft);
+            robotDrive = new RobotDrive(frontLeft,backLeft,frontRight,backRight);
 
         }
         public void drive(double move, double rotate) {
            //Wires are stupid, drive things are backwards
-            robotDrive.arcadeDrive(move, -rotate);
+            robotDrive.arcadeDrive(move, rotate);
         }
         public void rotate(double angularVelocity)
         {
@@ -103,6 +104,7 @@ public class Drivebase extends Subsystem {
         //Gets the changed angle from the position where the gyro was last reset.
         public double getGyroAngle(){
             double [] ypr = new double[3];
+            newGyro.GetYawPitchRoll(ypr);
             return ypr[0];
         }
 
@@ -123,26 +125,23 @@ public class Drivebase extends Subsystem {
     public void autoDriveSetup(){
         frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-        frontLeft.setInverted(true);
-        backLeft.setInverted(true);
-        frontRight.setInverted(true);
-        backRight.setInverted(true);
-        backLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
-        backRight.changeControlMode(CANTalon.TalonControlMode.Follower);
         frontLeft.changeControlMode(CANTalon.TalonControlMode.Position);
         frontRight.changeControlMode(CANTalon.TalonControlMode.Position);
+        frontLeft.configEncoderCodesPerRev(360);
+        frontRight.configEncoderCodesPerRev(360);
+        backLeft.changeControlMode(CANTalon.TalonControlMode.Follower);
+        backRight.changeControlMode(CANTalon.TalonControlMode.Follower);
+        backLeft.set(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
+        backRight.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
         frontLeft.setP(1);
         frontLeft.setI(0);
         frontLeft.setD(0);
         frontRight.setP(1);
         frontRight.setI(0);
         frontRight.setD(0);
-        backLeft.set(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
-        backRight.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
+
         //frontLeft.set(0);
         //frontRight.set(0);
-        frontLeft.configEncoderCodesPerRev(360);
-        frontRight.configEncoderCodesPerRev(360);
 
     }
     public void setSetpoint(double distanceInInches){

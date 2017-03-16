@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.commands.AutoDriveCommand;
 import org.usfirst.frc.team2928.commands.JoystickDrive;
 import org.usfirst.frc.team2928.commands.RotateCommand;
@@ -55,7 +56,10 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopPeriodic() {
+
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Left", visiontracking.getVisionLeft());
+        SmartDashboard.putNumber("Right", visiontracking.getVisionRight());
     }
 
     @Override
@@ -63,12 +67,14 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().removeAll();
        /* Command autoCommand = (Command) autoSelector.getSelected();
         autoCommand.start();*/
-       Scheduler.getInstance().add(new RotateCommand(90));
+       Scheduler.getInstance().add(new VisionDriveCommand());
       //  Scheduler.getInstance().add(new VisionDriveCommand());
     }
 
     @Override
     public void autonomousPeriodic() {
+        SmartDashboard.putNumber("Left", visiontracking.getVisionLeft());
+        SmartDashboard.putNumber("Right", visiontracking.getVisionRight());
         Scheduler.getInstance().run();
     }
 }
