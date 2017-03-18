@@ -16,8 +16,8 @@ public class ConstantDrive extends Command {
     }
 
     @Override
-    protected void initialize() {
-        Robot.drivebase.drive(0, output);
+    protected void execute() {
+        Robot.drivebase.drive(output, 0);
     }
 
     @Override

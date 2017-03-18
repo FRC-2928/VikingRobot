@@ -2,6 +2,7 @@ package org.usfirst.frc.team2928.subsystems;
 
 import com.ctre.CANTalon;
 import com.ctre.PigeonImu;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2928.Robot;
@@ -38,12 +39,23 @@ public class Drivebase extends Subsystem {
         rightSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
         rightSlave.set(FRONT_RIGHT_MOTOR_DEVICE_NUMBER);
 
+        left.setInverted(true);
+        right.setInverted(true);
+        leftSlave.setInverted(true);
+        rightSlave.setInverted(true);
+
+        left.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        right.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+        left.configEncoderCodesPerRev(1024);
+        right.configEncoderCodesPerRev(1024);
+        left.reverseSensor(true);
+
         robotDrive = new RobotDrive(left, right);
     }
 
     public void drive(double move, double rotate) {
         //Wires are stupid, drive things are backwards
-        robotDrive.arcadeDrive(move, rotate);
+        robotDrive.arcadeDrive(rotate, move);
     }
 
     public void rotate(double angularVelocity) {
@@ -110,20 +122,6 @@ public class Drivebase extends Subsystem {
         return ypr[0];
     }
 
-    public double getEncoderVelocity() {
-        return 1;
-    }
-
-    public void autoDriveSetup() {
-        left.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-        right.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-        left.changeControlMode(CANTalon.TalonControlMode.Position);
-        right.changeControlMode(CANTalon.TalonControlMode.Position);
-
-        left.configEncoderCodesPerRev(1024);
-        right.configEncoderCodesPerRev(1024);
-    }
-
     public double setSetpoint(double distanceInInches) {
         numberOfRevolutions = distanceInInches / (2 * Math.PI * 2.0);
         return numberOfRevolutions;
@@ -138,4 +136,25 @@ public class Drivebase extends Subsystem {
     protected void initDefaultCommand() {
         setDefaultCommand(new JoystickDrive());
     }
+
+    public void setDefaultMode()
+    {
+        left.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+        right.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    }
+
+    public void setDistanceMode()
+    {
+        left.changeControlMode(CANTalon.TalonControlMode.Position);
+        right.changeControlMode(CANTalon.TalonControlMode.Position);
+        left.setPIDSourceType(PIDSourceType.kDisplacement);
+        left.setPID(0.3, 0, 0);
+        right.setPID(0.3, 0, 0);
+    }
+
+    public double getPosition()
+    {
+        return (left.getPosition())/2;
+    }
 }
+

@@ -10,11 +10,7 @@ public class AutomaticShift extends Command {
 
     @Override
     protected void initialize() {
-        if(Robot.drivebase.getEncoderVelocity() > 1500){
-            Robot.shifter.shiftUp();
-        }
-        else{ Robot.shifter.shiftDown();}
-
+        Robot.shifter.shiftDown();
     }
 
     @Override

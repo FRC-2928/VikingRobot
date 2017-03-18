@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.autonomous.DriveForward;
-import org.usfirst.frc.team2928.commands.ConstantDrive;
 import org.usfirst.frc.team2928.subsystems.*;
 
 /**
@@ -17,12 +16,12 @@ public class Robot extends IterativeRobot {
 
     public static final Drivebase drivebase =  new Drivebase();
     public static final GearManipulator gearmanipulator = new GearManipulator();
-    public static final VisionTracking visiontracking = new VisionTracking();
     public static final RopeClimber ropeclimber = new RopeClimber();
     public static final Shooter shooter = new Shooter();
     public static final Shifter shifter = new Shifter();
     public static final Intake intake = new Intake();
 
+    public static VisionTracking visiontracking;
     public static OperatorInterface oi;
 
     //TODO: add to these command groups to make the robot do anything during auto.
@@ -34,6 +33,7 @@ public class Robot extends IterativeRobot {
         compressor.start();
         autoSelector = new SendableChooser<>();
         autoSelector.addDefault("Drive Forward", new DriveForward());
+        visiontracking = new VisionTracking();
         //created this last for ordering issues
         oi = new OperatorInterface();
     }
@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
-        new ConstantDrive(0.75, 4);
+        new DriveForward().start();
     }
 
     @Override
