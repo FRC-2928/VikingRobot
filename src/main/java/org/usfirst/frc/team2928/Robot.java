@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.autonomous.DriveForward;
+import org.usfirst.frc.team2928.commands.ConstantDrive;
 import org.usfirst.frc.team2928.subsystems.*;
 
 /**
@@ -52,7 +53,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
-        autoSelector.getSelected().start();
+        new ConstantDrive(0.75, 4);
     }
 
     @Override
