@@ -3,14 +3,10 @@ package org.usfirst.frc.team2928;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team2928.commands.AutoDriveCommand;
-import org.usfirst.frc.team2928.commands.JoystickDrive;
-import org.usfirst.frc.team2928.commands.RotateCommand;
-import org.usfirst.frc.team2928.commands.VisionDriveCommand;
+import org.usfirst.frc.team2928.autonomous.DriveForward;
 import org.usfirst.frc.team2928.subsystems.*;
 
 /**
@@ -18,45 +14,36 @@ import org.usfirst.frc.team2928.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 
-    public static Drivebase drivebase =  new Drivebase();
+    public static final Drivebase drivebase =  new Drivebase();
+    public static final GearManipulator gearmanipulator = new GearManipulator();
+    public static final VisionTracking visiontracking = new VisionTracking();
+    public static final RopeClimber ropeclimber = new RopeClimber();
+    public static final Shooter shooter = new Shooter();
+    public static final Shifter shifter = new Shifter();
+    public static final Intake intake = new Intake();
+
     public static OperatorInterface oi;
-    public static GearManipulator gearmanipulator = new GearManipulator();
-    public static VisionTracking visiontracking;
-    public static RopeClimber ropeclimber = new RopeClimber();
-    public static Shooter  shooter = new Shooter();
-    public static Shifter   shifter = new Shifter();
-    public static Intake intake = new Intake();
-    public static AutoDrivebase autoDrive  = new AutoDrivebase();
-    public static CommandGroup driveAuto;
-    public static CommandGroup midAuto;
-    public static CommandGroup leftAuto;
-    public static CommandGroup rightAuto;
+
     //TODO: add to these command groups to make the robot do anything during auto.
-    public static SendableChooser autoSelector;
-    public static Compressor   compressor = new Compressor();
+    private static SendableChooser<Command> autoSelector;
+    private static Compressor compressor = new Compressor();
+
     @Override
     public void robotInit() {
         compressor.start();
-        driveAuto = new CommandGroup();
-        visiontracking = new VisionTracking();
-        autoSelector = new SendableChooser();
-        autoSelector.addDefault("Drive Forward", driveAuto);
-        autoSelector.addObject("Middle Gear Autonomous",midAuto);
-        autoSelector.addObject("Left Gear Autonomous", leftAuto);
-        autoSelector.addObject("Right Gear Autonomous", rightAuto);
+        autoSelector = new SendableChooser<>();
+        autoSelector.addDefault("Drive Forward", new DriveForward());
         //created this last for ordering issues
         oi = new OperatorInterface();
     }
 
     @Override
     public void teleopInit() {
-
-        Scheduler.getInstance().add(new JoystickDrive());
+        Scheduler.getInstance().removeAll();
     }
 
     @Override
     public void teleopPeriodic() {
-
         Scheduler.getInstance().run();
         SmartDashboard.putNumber("Left", visiontracking.getVisionLeft());
         SmartDashboard.putNumber("Right", visiontracking.getVisionRight());
@@ -65,12 +52,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
-       /* Command autoCommand = (Command) autoSelector.getSelected();
-        autoCommand.start();*/
-
-      // Scheduler.getInstance().add(new AutoDriveCommand(-24));
-      //  Scheduler.getInstance().add(new RotateCommand(60));
-        Scheduler.getInstance().add(new AutoDriveCommand(24));
+        autoSelector.getSelected().start();
     }
 
     @Override

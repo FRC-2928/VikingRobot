@@ -8,9 +8,10 @@ public class ConstantDrive extends Command {
 
     private final double output;
 
-    public ConstantDrive(final double output) {
+    public ConstantDrive(final double output, final int seconds) {
         super();
         requires(Robot.drivebase);
+        setTimeout(seconds);
         this.output = output;
     }
 
@@ -21,6 +22,6 @@ public class ConstantDrive extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 }

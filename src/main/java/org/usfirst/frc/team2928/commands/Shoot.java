@@ -39,4 +39,5 @@ public class Shoot extends Command {
     protected boolean isFinished() {
         return false;
     }
+
 }

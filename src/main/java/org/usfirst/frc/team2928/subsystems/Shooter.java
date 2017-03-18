@@ -47,6 +47,10 @@ public class Shooter extends Subsystem {
 
     public void setSetpoint(double setpoint){motor.set(setpoint);}
 
+    public void runAgitator(double output){
+        agitatorMotor.set(output);
+    }
+
     @Override
     protected void initDefaultCommand() {
 

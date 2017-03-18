@@ -13,7 +13,7 @@ public class JoystickDrive extends Command {
 
     @Override
     protected void execute() {
-        Robot.drivebase.drive(Robot.oi.getDriveX(),Robot.oi.getDriveY());
+        Robot.drivebase.drive(-Robot.oi.getDriveX(),-Robot.oi.getDriveY());
         SmartDashboard.putNumber("Gyro Angle", Robot.drivebase.getGyroAngle());
     }
 

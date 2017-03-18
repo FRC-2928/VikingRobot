@@ -14,10 +14,11 @@ public class OperatorInterface {
     private static final int OPEN_GEAR_MANIPULATOR_PORT = 3;
     private static final int CLOSE_GEAR_MANIPULATOR_PORT = 4;
     private static final int CLIMB_BUTTON = 9;
-    private static final  int TRACKING_BUTTON = 1;
+    private static final int TRACKING_BUTTON = 1;
     private static final int SHOOTING_BUTTON = 5;
     private static final int INTAKE_BUTTON_PORT = 8;
     private static final int SHIFT_DOWN_BUTTON = 9;
+    private static final int TOGGLE_AGITATOR_BUTTON = 10;
 
 
     private final Joystick driveStick;
@@ -31,6 +32,7 @@ public class OperatorInterface {
     private final JoystickButton intakeButton;
     private final JoystickButton shiftButton;
     private final JoystickButton shootButton;
+    private final JoystickButton toggleAgitatorButton;
 
     public OperatorInterface() {
         driveStick = new Joystick(DRIVE_JOYSTICK_PORT);
@@ -54,6 +56,8 @@ public class OperatorInterface {
         shiftButton.whenInactive(new ShiftUp());
         shootButton = new JoystickButton(opStick,SHOOTING_BUTTON);
         shootButton.whileHeld(new Shoot());
+        toggleAgitatorButton = new JoystickButton(opStick, TOGGLE_AGITATOR_BUTTON);
+        toggleAgitatorButton.whileHeld(new backwardsAgitatorCommand());
     }
 
     public double getDriveY() {
