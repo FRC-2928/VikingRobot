@@ -13,7 +13,7 @@ public class GearPlacementCommandGroup extends CommandGroup {
     GearPlacementCommandGroup() {
         addSequential(new ConstantDrive(0.75, 3.5));
         addSequential(new OpenGearManipulator());
-        addSequential(new WaitCommand(0.3));
+        addSequential(new WaitCommand(3));
         addSequential(new ConstantDrive(-.6, 1));
         addSequential(new CloseGearManipulator());
     }

@@ -7,16 +7,17 @@ import org.usfirst.frc.team2928.Robot;
 
 public class RotateCommand extends PIDCommand {
 
-    public RotateCommand(double setpoint) {
+    int number = 0;
+
+    public RotateCommand(double degrees) {
         super(.0125,.008,.2);
         requires(Robot.drivebase);
         getPIDController().setAbsoluteTolerance(1);
         getPIDController().setOutputRange(-.8,.8);
-        setSetpoint(setpoint);
+        setSetpoint(degrees);
         LiveWindow.addActuator("Drivebase", "Rotate PID Controller", getPIDController());
     }
-    int number = 0;
-    int count = 1;
+
     @Override
     protected void initialize(){
         Robot.drivebase.calibrateGyro();

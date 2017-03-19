@@ -16,6 +16,8 @@ public class Drivebase extends Subsystem {
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
 
+    private static final int TICS_PER_REVOLUTION = 1024;
+
     private final PigeonImu gyro = new PigeonImu(new CANTalon(6));
 
     private final CANTalon left;
@@ -46,9 +48,10 @@ public class Drivebase extends Subsystem {
 
         left.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
         right.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-        left.configEncoderCodesPerRev(1024);
-        right.configEncoderCodesPerRev(1024);
+        left.configEncoderCodesPerRev(TICS_PER_REVOLUTION);
+        right.configEncoderCodesPerRev(TICS_PER_REVOLUTION);
         left.reverseSensor(true);
+        right.reverseSensor(true);
 
         robotDrive = new RobotDrive(left, right);
     }
@@ -59,7 +62,7 @@ public class Drivebase extends Subsystem {
     }
 
     public void rotate(double angularVelocity) {
-        robotDrive.arcadeDrive(angularVelocity, 0);
+        drive(0, -angularVelocity);
     }
 
     /*
@@ -127,9 +130,10 @@ public class Drivebase extends Subsystem {
         return numberOfRevolutions;
     }
 
-    public void autoDrive(double setPoint) {
-        left.set(-setPoint);
-        right.set(setPoint);
+    public void driveDistance(final double revolutions) {
+        double tics = revolutions * TICS_PER_REVOLUTION;
+        left.set(tics);
+        right.set(tics);
     }
 
     @Override
@@ -141,6 +145,8 @@ public class Drivebase extends Subsystem {
     {
         left.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         right.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+
+
     }
 
     public void setDistanceMode()
@@ -148,8 +154,8 @@ public class Drivebase extends Subsystem {
         left.changeControlMode(CANTalon.TalonControlMode.Position);
         right.changeControlMode(CANTalon.TalonControlMode.Position);
         left.setPIDSourceType(PIDSourceType.kDisplacement);
-        left.setPID(0.3, 0, 0);
-        right.setPID(0.3, 0, 0);
+        left.setPID(0.003, 0, 0);
+        right.setPID(0.003, 0, 0);
     }
 
     public boolean isOnPoint()
