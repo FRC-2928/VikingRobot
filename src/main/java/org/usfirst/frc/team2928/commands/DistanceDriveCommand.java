@@ -17,15 +17,17 @@ public class DistanceDriveCommand extends Command {
     @Override
     protected void initialize() {
         Robot.drivebase.setDistanceMode();
+        Robot.drivebase.initPosition();
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(Robot.drivebase.getPosition()) < 0.2;
+        return Robot.drivebase.isOnPoint();
     }
 
     @Override
     protected void end() {
         Robot.drivebase.drive(0, 0);
+        Robot.drivebase.setDefaultMode();
     }
 }

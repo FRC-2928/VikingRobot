@@ -8,7 +8,7 @@ public class ConstantDrive extends Command {
 
     private final double output;
 
-    public ConstantDrive(final double output, final int seconds) {
+    public ConstantDrive(final double output, final double seconds) {
         super();
         requires(Robot.drivebase);
         setTimeout(seconds);

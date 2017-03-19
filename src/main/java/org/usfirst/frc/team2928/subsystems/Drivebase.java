@@ -152,9 +152,15 @@ public class Drivebase extends Subsystem {
         right.setPID(0.3, 0, 0);
     }
 
-    public double getPosition()
+    public boolean isOnPoint()
     {
-        return (left.getPosition())/2;
+        return Math.abs(left.getClosedLoopError()) < .4 && Math.abs(right.getClosedLoopError()) < .4;
+    }
+
+    public void initPosition()
+    {
+        left.setPosition(0);
+        right.setPosition(0);
     }
 }
 
