@@ -5,15 +5,15 @@ import org.usfirst.frc.team2928.Robot;
 
 public class DistanceDriveCommand extends Command {
 
-    private double setInches;
+    private double revolutions;
 
-    public DistanceDriveCommand(double setInches) {
+    public DistanceDriveCommand(double revolutions) {
         super();
         requires(Robot.drivebase);
-        this.setInches = setInches;
+        this.revolutions = revolutions;
     }
 
-    
+
     @Override
     protected void initialize() {
         Robot.drivebase.setDistanceMode();
@@ -22,12 +22,12 @@ public class DistanceDriveCommand extends Command {
 
     @Override
     protected void execute() {
-        Robot.drivebase.driveDistance(setInches / (4*Math.PI));
+        Robot.drivebase.driveDistance(revolutions);
     }
 
     @Override
     protected boolean isFinished() {
-        return false/* && Robot.drivebase.isOnPoint()*/;
+        return Robot.drivebase.isOnPoint();
     }
 
     @Override

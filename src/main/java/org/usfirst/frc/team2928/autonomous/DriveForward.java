@@ -8,7 +8,7 @@ import org.usfirst.frc.team2928.commands.RotateCommand;
 public class DriveForward extends CommandGroup {
 
     public DriveForward() {
-        addSequential(new ConstantDrive(0.75, 4));
-        //addSequential(new DistanceDriveCommand(4));
+        //addSequential(new ConstantDrive(0.75, 4));
+        addSequential(new DistanceDriveCommand(4));
     }
 }

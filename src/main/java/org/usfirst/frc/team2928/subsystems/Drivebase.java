@@ -31,6 +31,7 @@ public class Drivebase extends Subsystem {
     public Drivebase() {
         super();
 
+        System.out.println("Netconsole test");
         left = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
         leftSlave = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
         leftSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -52,6 +53,15 @@ public class Drivebase extends Subsystem {
         right.configEncoderCodesPerRev(TICS_PER_REVOLUTION);
         left.reverseSensor(true);
         right.reverseSensor(true);
+
+        // PID Stuff
+        left.setPID(0.03, 0, 0, 0, 0, 1, 0);
+        right.setPID(0.03, 0, 0, 0, 0, 1, 0);
+
+        left.configNominalOutputVoltage(+0, -0);
+        right.configPeakOutputVoltage(+12, -12);
+        left.setProfile(0);
+        right.setProfile(0);
 
         robotDrive = new RobotDrive(left, right);
     }
@@ -145,17 +155,13 @@ public class Drivebase extends Subsystem {
     {
         left.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         right.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-
-
     }
 
     public void setDistanceMode()
     {
         left.changeControlMode(CANTalon.TalonControlMode.Position);
         right.changeControlMode(CANTalon.TalonControlMode.Position);
-        left.setPIDSourceType(PIDSourceType.kDisplacement);
-        left.setPID(0.003, 0, 0);
-        right.setPID(0.003, 0, 0);
+
     }
 
     public boolean isOnPoint()
