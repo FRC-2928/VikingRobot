@@ -173,6 +173,8 @@ public class Drivebase extends Subsystem {
     {
         left.setPosition(0);
         right.setPosition(0);
+        left.setEncPosition(0);
+        right.setEncPosition(0);
     }
 }
 

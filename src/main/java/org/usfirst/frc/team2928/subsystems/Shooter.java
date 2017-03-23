@@ -27,6 +27,7 @@ public class Shooter extends Subsystem {
         motor.setI(0);
         motor.setD(0);
     }
+    public double error(){return motor.getClosedLoopError();}
     public double getVelocity()
     {
         return motor.getEncVelocity();
