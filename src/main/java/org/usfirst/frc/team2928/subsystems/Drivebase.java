@@ -31,7 +31,6 @@ public class Drivebase extends Subsystem {
     public Drivebase() {
         super();
 
-        System.out.println("Netconsole test");
         left = new CANTalon(FRONT_LEFT_MOTOR_DEVICE_NUMBER);
         leftSlave = new CANTalon(BACK_LEFT_MOTOR_DEVICE_NUMBER);
         leftSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -55,8 +54,8 @@ public class Drivebase extends Subsystem {
         right.reverseSensor(true);
 
         // PID Stuff
-        left.setPID(0.03, 0, 0, 0, 0, 1, 0);
-        right.setPID(0.03, 0, 0, 0, 0, 1, 0);
+        left.setPID(0.1, 0, 0, 0.025, 0, 1, 0);
+        right.setPID(0.1, 0, 0, 0.025, 0, 1, 0);
 
         left.configNominalOutputVoltage(+0, -0);
         right.configPeakOutputVoltage(+12, -12);
@@ -142,7 +141,7 @@ public class Drivebase extends Subsystem {
 
     public void driveDistance(final double revolutions) {
         double tics = revolutions * TICS_PER_REVOLUTION;
-        left.set(tics);
+        left.setSetpoint(tics);
         right.set(tics);
     }
 
@@ -151,26 +150,33 @@ public class Drivebase extends Subsystem {
         setDefaultCommand(new JoystickDrive());
     }
 
-    public void setDefaultMode()
-    {
+    public void setDefaultMode() {
         left.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         right.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+        setBrakeMode(false);
     }
 
-    public void setDistanceMode()
-    {
+    public void setDistanceMode() {
         left.changeControlMode(CANTalon.TalonControlMode.Position);
         right.changeControlMode(CANTalon.TalonControlMode.Position);
-
+        setBrakeMode(true);
     }
 
-    public boolean isOnPoint()
-    {
-        return Math.abs(left.getClosedLoopError()) < .4 && Math.abs(right.getClosedLoopError()) < .4;
+    private void setBrakeMode(boolean enabled) {
+        left.enableBrakeMode(enabled);
+        leftSlave.enableBrakeMode(enabled);
+        right.enableBrakeMode(enabled);
+        rightSlave.enableBrakeMode(enabled);
     }
 
-    public void initPosition()
-    {
+    public boolean isOnPoint() {
+        System.out.println("Left Error: " + left.getClosedLoopError());
+        System.out.println("Left setpoint: " + left.getSetpoint());
+        System.out.println("Left position: " + left.getEncPosition());
+        return false;
+    }
+
+    public void initPosition() {
         left.setPosition(0);
         right.setPosition(0);
         left.setEncPosition(0);

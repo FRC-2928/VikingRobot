@@ -12,8 +12,8 @@ public class Shooter extends Subsystem {
 
     private final CANTalon motor;
     private final Talon agitatorMotor;
-    public Shooter(){
 
+    public Shooter() {
         motor = new CANTalon(LEAD_SHOOTER_PORT);
         motor.setInverted(true);
         CANTalon follower = new CANTalon(FOLLOWER_SHOOTER_PORT);
@@ -27,28 +27,32 @@ public class Shooter extends Subsystem {
         motor.setI(0);
         motor.setD(0);
     }
-    public double error(){return motor.getClosedLoopError();}
-    public double getVelocity()
-    {
+
+    public double error() {
+        return motor.getClosedLoopError();
+    }
+
+    public double getVelocity() {
         return motor.getEncVelocity();
     }
-    public void stopMotor()
-    {
+
+    public void stopMotor() {
         motor.set(0);
     }
 
-    public void agitate()
-    {
+    public void agitate() {
         agitatorMotor.set(.6);
     }
-    public void stopAgitation()
-    {
+
+    public void stopAgitation() {
         agitatorMotor.set(0);
     }
 
-    public void setSetpoint(double setpoint){motor.set(setpoint);}
+    public void setSetpoint(double setpoint) {
+        motor.set(setpoint);
+    }
 
-    public void runAgitator(double output){
+    public void runAgitator(double output) {
         agitatorMotor.set(output);
     }
 

@@ -13,7 +13,6 @@ public class DistanceDriveCommand extends Command {
         this.revolutions = revolutions;
     }
 
-
     @Override
     protected void initialize() {
         Robot.drivebase.setDistanceMode();
