@@ -137,7 +137,7 @@ public class Drivebase extends Subsystem {
 
     public double getEncPosition()
     {
-        return left.getPosition();
+        return (Math.abs(left.getEncPosition()) + Math.abs(right.getEncPosition()))/2;
     }
     public double inchesToEncTics(double distanceInInches) {
         numberOfRevolutions = (distanceInInches / (2 * Math.PI * 2.0)) * TICS_PER_REVOLUTION;

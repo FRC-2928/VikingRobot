@@ -23,7 +23,6 @@ public class Robot extends IterativeRobot {
     public static final Intake intake = new Intake();
 
     public static VisionTracking visiontracking;
-    private CameraServer cameraServer;
     public static OperatorInterface oi;
 
     //TODO: add to these command groups to make the robot do anything during auto.
@@ -33,6 +32,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         compressor.start();
+        CameraServer.getInstance().startAutomaticCapture(0);
         autoSelector = new SendableChooser<>();
         autoSelector.addDefault("Drive Forward", new DriveForward());
         visiontracking = new VisionTracking();

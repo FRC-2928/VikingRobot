@@ -9,7 +9,7 @@ import org.usfirst.frc.team2928.Robot;
 public class SoftwareDistanceDrive extends PIDCommand {
     double setpoint;
     public SoftwareDistanceDrive(double inches) {
-        super(0.0003, 0, 0);
+        super(0.00015, 0, 0);
         requires(Robot.drivebase);
         this.setpoint = Robot.drivebase.inchesToEncTics(inches);
     }
