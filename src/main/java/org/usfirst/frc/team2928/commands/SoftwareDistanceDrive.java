@@ -9,7 +9,7 @@ import org.usfirst.frc.team2928.Robot;
 public class SoftwareDistanceDrive extends PIDCommand {
     double setpoint;
     public SoftwareDistanceDrive(double inches) {
-        super(0.003, 0, 0);
+        super(0.0003, 0, 0);
         requires(Robot.drivebase);
         this.setpoint = Robot.drivebase.inchesToEncTics(inches);
     }
@@ -29,6 +29,7 @@ public class SoftwareDistanceDrive extends PIDCommand {
     @Override
     protected void initialize() {
         super.initialize();
+        Robot.drivebase.setBrakeMode(true);
         Robot.drivebase.initPosition();
         getPIDController().setSetpoint(setpoint);
         System.out.println("Setpoint: " + setpoint);

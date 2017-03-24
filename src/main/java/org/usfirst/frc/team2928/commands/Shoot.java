@@ -5,28 +5,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.Robot;
 
 public class Shoot extends Command {
-    public Shoot() {
+    public Shoot(){
         super();
         requires(Robot.shooter);
         requires(Robot.gearmanipulator);
     }
-
-    @Override
-    protected void initialize() {
+ @Override
+    protected void initialize()
+    {
         Robot.gearmanipulator.flipDown();
     }
 
 
+
     @Override
     protected void execute() {
-        double targetSpeed = .75 * 1500;
+        double targetSpeed = .75* 1500;
+        Robot.shooter.setSetpoint(.75*1500);
+        SmartDashboard.putNumber("Setpoint Set",targetSpeed);
 
-        Robot.shooter.setSetpoint(targetSpeed);
-        if (Math.abs(Robot.shooter.error()) < 20) {
             Robot.shooter.agitate();
-        } else {
-            Robot.shooter.stopAgitation();
-        }
 
 
     }

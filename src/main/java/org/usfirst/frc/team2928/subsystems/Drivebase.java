@@ -16,7 +16,7 @@ public class Drivebase extends Subsystem {
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
     private static final int MAX_FIELD_OF_VIEW = 30;
 
-    private static final int TICS_PER_REVOLUTION = 1024;
+    private static final int TICS_PER_REVOLUTION = 1024 * 3;
 
     private final PigeonImu gyro = new PigeonImu(new CANTalon(6));
 
@@ -168,7 +168,7 @@ public class Drivebase extends Subsystem {
         setBrakeMode(true);
     }
 
-    private void setBrakeMode(boolean enabled) {
+    public void setBrakeMode(boolean enabled) {
         left.enableBrakeMode(enabled);
         leftSlave.enableBrakeMode(enabled);
         right.enableBrakeMode(enabled);
