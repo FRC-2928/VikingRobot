@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2928;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,6 +23,7 @@ public class Robot extends IterativeRobot {
     public static final Intake intake = new Intake();
 
     public static VisionTracking visiontracking;
+    private CameraServer cameraServer;
     public static OperatorInterface oi;
 
     //TODO: add to these command groups to make the robot do anything during auto.
