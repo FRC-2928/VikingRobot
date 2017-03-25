@@ -69,7 +69,8 @@ public class Drivebase extends Subsystem {
     public void drive(double move, double rotate) {
         //Wires are stupid, drive things are backwards
         robotDrive.arcadeDrive(rotate, move);
-        System.out.println("Left Position: "+ left.getPosition());
+        System.out.println("Left output: "+ left.get());
+        System.out.println("Right output: "+ right.get());
     }
 
     public void rotate(double angularVelocity) {
@@ -148,9 +149,9 @@ public class Drivebase extends Subsystem {
         return gyro;
     }
 
-    public double getEncPosition()
+    public double getPosition()
     {
-        return (Math.abs(left.getEncPosition()) + Math.abs(right.getEncPosition()))/2;
+        return (Math.abs(left.getPosition()) + Math.abs(right.getPosition()))/2;
     }
     public double inchesToEncTics(double distanceInInches) {
         numberOfRevolutions = (distanceInInches / (2 * Math.PI * 2.0)) * TICS_PER_REVOLUTION;

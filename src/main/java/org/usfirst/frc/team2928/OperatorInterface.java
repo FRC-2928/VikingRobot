@@ -57,7 +57,7 @@ public class OperatorInterface {
         shootButton = new JoystickButton(opStick,SHOOTING_BUTTON);
         shootButton.whileHeld(new Shoot());
         toggleAgitatorButton = new JoystickButton(opStick, TOGGLE_AGITATOR_BUTTON);
-        toggleAgitatorButton.whileHeld(new backwardsAgitatorCommand());
+        toggleAgitatorButton.whileHeld(new BackwardsAgitatorCommand());
     }
 
     public double getDriveY() {

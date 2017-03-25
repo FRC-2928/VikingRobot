@@ -10,11 +10,11 @@ import org.usfirst.frc.team2928.commands.SoftwareDistanceDrive;
 /**
  * Created by Viking Robotics on 3/18/2017.
  */
-public class GearPlacementCommandGroup extends CommandGroup {
-    public GearPlacementCommandGroup() {
+public class MidGearAuto extends CommandGroup {
+    public MidGearAuto() {
         System.out.println("Placing mid gear");
         addSequential(new CloseGearManipulator());
-        addSequential(new SoftwareDistanceDrive(7.0 * 12));
+        addSequential(new SoftwareDistanceDrive(7.0 * 12),4);
         addSequential(new WaitCommand(1));
         addSequential(new OpenGearManipulator());
         addSequential(new WaitCommand(1));

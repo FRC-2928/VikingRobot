@@ -3,8 +3,8 @@ package org.usfirst.frc.team2928.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2928.Robot;
 
-public class backwardsAgitatorCommand extends Command {
-    public backwardsAgitatorCommand(){
+public class BackwardsAgitatorCommand extends Command {
+    public BackwardsAgitatorCommand(){
         requires(Robot.shooter);
     }
     @Override public void initialize()

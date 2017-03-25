@@ -1,28 +1,21 @@
 package org.usfirst.frc.team2928.commands;
 
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import org.usfirst.frc.team2928.Robot;
 
-/**
- * Created by Viking Robotics on 3/23/2017.
- */
 public class SoftwareDistanceDrive extends PIDCommand {
-    double setpoint;
-    PIDController gyroController;
-    private double lateralVelocity;
+
+    private double setpoint;
+
     public SoftwareDistanceDrive(double inches) {
-        super(0.00015, 0.0000001, 0);
+        super(0.00007, 0.0000001, 0);
         requires(Robot.drivebase);
         this.setpoint = Robot.drivebase.inchesToEncTics(inches);
-        gyroController = new PIDController(.00015,.000000003,0,Robot.drivebase.right(),Robot.drivebase.right());
     }
 
     @Override
     protected double returnPIDInput() {
-        double enc = Robot.drivebase.getEncPosition();
-        System.out.println("Left encoder position: " + enc);
-        return enc;
+        return Robot.drivebase.getPosition();
     }
 
     @Override
@@ -36,15 +29,8 @@ public class SoftwareDistanceDrive extends PIDCommand {
         Robot.drivebase.setBrakeMode(true);
         Robot.drivebase.initPosition();
         getPIDController().setSetpoint(setpoint);
-        System.out.println("Setpoint: " + setpoint);
         getPIDController().setOutputRange(-.65,.65);
         getPIDController().setAbsoluteTolerance(102);
-        Robot.drivebase.calibrateGyro();
-    }
-
-    @Override
-    protected void execute() {
-        lateralVelocity = (Robot.drivebase.getGyroAngle() % 360) - 180;
     }
 
     @Override
