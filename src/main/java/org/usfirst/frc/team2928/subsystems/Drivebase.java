@@ -26,6 +26,7 @@ public class Drivebase extends Subsystem {
     private final CANTalon rightSlave;
 
     private double numberOfRevolutions;
+    private double rotateConstant;
     private RobotDrive robotDrive;
 
     public Drivebase() {
@@ -134,6 +135,18 @@ public class Drivebase extends Subsystem {
         gyro.GetYawPitchRoll(ypr);
         return ypr[0];
     }
+    public void driveStraight(double input)
+    {
+        robotDrive.arcadeDrive(input, rotateConstant);
+    }
+    public void setRotateConstant(double output)
+    {
+        rotateConstant = output;
+    }
+    public PigeonImu getGyro()
+    {
+        return gyro;
+    }
 
     public double getEncPosition()
     {
@@ -144,7 +157,10 @@ public class Drivebase extends Subsystem {
         System.out.println("Revs:"+numberOfRevolutions);
         return numberOfRevolutions;
     }
-
+    public CANTalon right()
+    {
+        return right;
+    }
     public void driveDistance(final double revolutions) {
         double tics = revolutions * TICS_PER_REVOLUTION;
         left.setSetpoint(tics);

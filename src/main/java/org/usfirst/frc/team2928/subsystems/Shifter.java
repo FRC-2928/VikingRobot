@@ -20,6 +20,9 @@ public class Shifter extends Subsystem {
     public void shiftDown(){
         shiftSolenoid.set(true);
     }
+
+    public boolean isLowGear() { return shiftSolenoid.get(); }
+
     @Override
     protected void initDefaultCommand() {
 

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2928.commands;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import org.usfirst.frc.team2928.Robot;
 
@@ -8,10 +9,13 @@ import org.usfirst.frc.team2928.Robot;
  */
 public class SoftwareDistanceDrive extends PIDCommand {
     double setpoint;
+    PIDController gyroController;
+    private double lateralVelocity;
     public SoftwareDistanceDrive(double inches) {
-        super(0.00015, 0, 0);
+        super(0.00015, 0.0000001, 0);
         requires(Robot.drivebase);
         this.setpoint = Robot.drivebase.inchesToEncTics(inches);
+        gyroController = new PIDController(.00015,.000000003,0,Robot.drivebase.right(),Robot.drivebase.right());
     }
 
     @Override
@@ -23,7 +27,7 @@ public class SoftwareDistanceDrive extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        Robot.drivebase.drive(output, 0);
+        Robot.drivebase.drive(output,0);
     }
 
     @Override
@@ -33,10 +37,15 @@ public class SoftwareDistanceDrive extends PIDCommand {
         Robot.drivebase.initPosition();
         getPIDController().setSetpoint(setpoint);
         System.out.println("Setpoint: " + setpoint);
-        getPIDController().setOutputRange(-.85,.85);
+        getPIDController().setOutputRange(-.65,.65);
         getPIDController().setAbsoluteTolerance(102);
+        Robot.drivebase.calibrateGyro();
     }
 
+    @Override
+    protected void execute() {
+        lateralVelocity = (Robot.drivebase.getGyroAngle() % 360) - 180;
+    }
 
     @Override
     protected boolean isFinished() {
