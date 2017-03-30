@@ -3,11 +3,11 @@ package org.usfirst.frc.team2928.commands;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import org.usfirst.frc.team2928.Robot;
 
-public class SoftwareDistanceDrive extends PIDCommand {
+public class DistanceDrive extends PIDCommand {
 
     private double setpoint;
 
-    public SoftwareDistanceDrive(double inches) {
+    public DistanceDrive(double inches) {
         super(0.00007, 0.0000001, 0);
         requires(Robot.drivebase);
         this.setpoint = Robot.drivebase.inchesToEncTics(inches);

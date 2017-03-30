@@ -1,29 +1,22 @@
 package org.usfirst.frc.team2928.commands;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.Robot;
 
-public class RotateCommand extends PIDCommand {
+public class Rotate extends PIDCommand {
 
     int number = 0;
 
-    public RotateCommand(double degrees) {
+    public Rotate(double degrees) {
         super(.0125,.008,.2);
         requires(Robot.drivebase);
         getPIDController().setAbsoluteTolerance(1);
         getPIDController().setOutputRange(-.8,.8);
         setSetpoint(degrees);
-        LiveWindow.addActuator("Drivebase", "Rotate PID Controller", getPIDController());
-    }
-
-    @Override
-    protected void initialize(){
-        Robot.drivebase.calibrateGyro();
-
-        SmartDashboard.putNumber("Initalize Counter", number);
-        number++;
+        LiveWindow.addActuator("Drivebase", "RotateRelative PID Controller", getPIDController());
     }
 
     @Override

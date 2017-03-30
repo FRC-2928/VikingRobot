@@ -7,9 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team2928.autonomous.DriveForward;
-import org.usfirst.frc.team2928.autonomous.MidGearAuto;
-import org.usfirst.frc.team2928.autonomous.RightGearAuto;
+import org.usfirst.frc.team2928.autonomous.*;
 import org.usfirst.frc.team2928.commands.ShiftDown;
 import org.usfirst.frc.team2928.subsystems.*;
 
@@ -40,6 +38,8 @@ public class Robot extends IterativeRobot {
         autoSelector.addDefault("Drive Forward", new DriveForward());
         autoSelector.addObject("Place Middle Gear", new MidGearAuto());
         autoSelector.addObject("Place Right Gear <<< Feeling lucky?", new RightGearAuto());
+        autoSelector.addObject("Shoot on Blue Alliance", new BlueShootAuto());
+        autoSelector.addObject("Shoot on Red Alliance", new RedShootAuto());
         SmartDashboard.putData("Autonomous Command", autoSelector);
         visiontracking = new VisionTracking();
         //created this last for ordering issues

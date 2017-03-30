@@ -14,7 +14,6 @@ public class Drivebase extends Subsystem {
     private static final int FRONT_RIGHT_MOTOR_DEVICE_NUMBER = 3;
     private static final int BACK_LEFT_MOTOR_DEVICE_NUMBER = 1;
     private static final int BACK_RIGHT_MOTOR_DEVICE_NUMBER = 2;
-    private static final int MAX_FIELD_OF_VIEW = 30;
 
     private static final int TICS_PER_REVOLUTION = 1024 * 3;
 
@@ -24,9 +23,6 @@ public class Drivebase extends Subsystem {
     private final CANTalon leftSlave;
     private final CANTalon right;
     private final CANTalon rightSlave;
-
-    private double numberOfRevolutions;
-    private double rotateConstant;
     private RobotDrive robotDrive;
 
     public Drivebase() {
@@ -77,54 +73,6 @@ public class Drivebase extends Subsystem {
         drive(0, -angularVelocity);
     }
 
-    /*
-        Three cases: above target, below target, and completely off target
-        -networkTables value: Turn right
-        +networkTables value: Turn left
-        -1,1 Rotate the robot until the input is <1 or >-1
-        An input of about .999 is MAX_FIELD_OF_VIEW degrees left of the target
-        -.999 is MAX_FIELD_OF_VIEW degrees right of the target
-        Things to code:
-        A method to convert to degrees
-        Gyro PID that takes in the degrees as the current input
-        A method that turns right until the input is > -1 or left in the opposite case
-     */
-    private boolean inRange() {
-        if ((Robot.visiontracking.getPos() < MAX_FIELD_OF_VIEW) && (Robot.visiontracking.getPos() > -MAX_FIELD_OF_VIEW)) {
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
-    public boolean onTarget() {
-        if ((Robot.visiontracking.getPos() < .1) && ((Robot.visiontracking.getPos() > -.1))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void visionDrive(double angularVelocity) {
-        if (inRange()) {
-            robotDrive.arcadeDrive(angularVelocity, 0);
-            if (onTarget()) {
-                robotDrive.arcadeDrive(0, 0);
-            }
-        } else {
-            if (Robot.visiontracking.getPos() == MAX_FIELD_OF_VIEW) {
-                do {
-                    robotDrive.arcadeDrive(-.7, 0);
-                } while (Robot.visiontracking.getPos() == MAX_FIELD_OF_VIEW);
-            } else if (Robot.visiontracking.getPos() == -MAX_FIELD_OF_VIEW) {
-                do {
-                    robotDrive.arcadeDrive(.7, 0);
-                } while (Robot.visiontracking.getPos() == -MAX_FIELD_OF_VIEW);
-            }
-        }
-    }
-
     //Resets the robot's gyro
     public void calibrateGyro() {
         gyro.SetYaw(0);
@@ -136,36 +84,13 @@ public class Drivebase extends Subsystem {
         gyro.GetYawPitchRoll(ypr);
         return ypr[0];
     }
-    public void driveStraight(double input)
-    {
-        robotDrive.arcadeDrive(input, rotateConstant);
-    }
-    public void setRotateConstant(double output)
-    {
-        rotateConstant = output;
-    }
-    public PigeonImu getGyro()
-    {
-        return gyro;
-    }
-
     public double getPosition()
     {
         return (Math.abs(left.getPosition()) + Math.abs(right.getPosition()))/2;
     }
+
     public double inchesToEncTics(double distanceInInches) {
-        numberOfRevolutions = (distanceInInches / (2 * Math.PI * 2.0)) * TICS_PER_REVOLUTION;
-        System.out.println("Revs:"+numberOfRevolutions);
-        return numberOfRevolutions;
-    }
-    public CANTalon right()
-    {
-        return right;
-    }
-    public void driveDistance(final double revolutions) {
-        double tics = revolutions * TICS_PER_REVOLUTION;
-        left.setSetpoint(tics);
-        right.set(tics);
+        return (distanceInInches / (2 * Math.PI * 2.0)) * TICS_PER_REVOLUTION;
     }
 
     @Override

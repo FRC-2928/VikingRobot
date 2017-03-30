@@ -38,6 +38,7 @@ public class Shooter extends Subsystem {
 
     public void stopMotor() {
         motor.set(0);
+        motor.disableControl();
     }
 
     public void agitate() {
@@ -49,6 +50,7 @@ public class Shooter extends Subsystem {
     }
 
     public void setSetpoint(double setpoint) {
+        motor.enableControl();
         motor.set(setpoint);
     }
 

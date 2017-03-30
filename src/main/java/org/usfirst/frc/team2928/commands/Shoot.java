@@ -20,17 +20,16 @@ public class Shoot extends Command {
 
     @Override
     protected void execute() {
-        double targetSpeed = .75* 1500;
-        Robot.shooter.setSetpoint(.75*1500);
+        double targetSpeed = .5* 1500;
+        Robot.shooter.setSetpoint(targetSpeed);
         SmartDashboard.putNumber("Setpoint Set",targetSpeed);
-
-            Robot.shooter.agitate();
+        Robot.shooter.agitate();
 
 
     }
 
     @Override
-    protected void interrupted() {
+    protected void end() {
         Robot.shooter.stopMotor();
         Robot.shooter.stopAgitation();
     }
