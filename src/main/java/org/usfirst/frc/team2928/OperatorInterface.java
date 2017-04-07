@@ -18,8 +18,8 @@ public class OperatorInterface {
     private static final int SHOOTING_BUTTON = 5;
     private static final int INTAKE_BUTTON_PORT = 8;
     private static final int SHIFT_DOWN_BUTTON = 9;
-    private static final int TOGGLE_PICKUPBAR_BUTTON = 10;
-    private static final int LIFT_PICKUP_BUTTON = 3;
+    private static final int TOGGLE_PICKUPBAR_BUTTON = 6;
+
 
 
     private final Joystick driveStick;
@@ -33,6 +33,7 @@ public class OperatorInterface {
     private final JoystickButton intakeButton;
     private final JoystickButton shiftButton;
     private final JoystickButton shootButton;
+    private final JoystickButton groundGearOut;
     private final JoystickButton togglePickupBarButton;
 
     public OperatorInterface() {
@@ -52,13 +53,19 @@ public class OperatorInterface {
         flipInButton.whenPressed(new FlipGear(false));
         intakeButton = new JoystickButton(opStick, INTAKE_BUTTON_PORT);
         intakeButton.whileHeld(new IntakeCommand());
+        intakeButton.whileHeld(new GroundPickupDown());
+        intakeButton.whenInactive(new GroundPickupUpCommand());
+        groundGearOut = new JoystickButton(opStick, 10);
+        groundGearOut.whileHeld(new IntakeCommand());
         shiftButton = new JoystickButton(driveStick, SHIFT_DOWN_BUTTON);
         shiftButton.whileHeld(new ShiftDown());
         shiftButton.whenInactive(new ShiftUp());
         shootButton = new JoystickButton(opStick,SHOOTING_BUTTON);
         shootButton.whileHeld(new Shoot());
         togglePickupBarButton = new JoystickButton(opStick, TOGGLE_PICKUPBAR_BUTTON);
-        togglePickupBarButton.whileHeld(new BackwardsAgitatorCommand());
+        togglePickupBarButton.whileHeld(new GroundPickupDown());
+        togglePickupBarButton.whenInactive(new GroundPickupUpCommand());
+
     }
 
     public double getDriveY() {

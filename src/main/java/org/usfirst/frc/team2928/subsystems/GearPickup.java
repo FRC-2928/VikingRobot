@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearPickup extends Subsystem{
 
 
-    private final int ARM_SOLENOID_PORT = 420;
+    private final int ARM_SOLENOID_PORT = 3;
 
     private boolean deployed = false;
     private final Solenoid arm;
