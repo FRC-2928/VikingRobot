@@ -16,14 +16,14 @@ public class GearPickup extends Subsystem{
 
     public GearPickup(){
          arm = new Solenoid(ARM_SOLENOID_PORT);
-         close();
+         goDown();
 
     }
-    public void close(){
+    public void goDown(){
         deployed = false;
         arm.set(false);
     }
-    public void open(){
+    public void goUp(){
         deployed = true;
         arm.set(true);
     }

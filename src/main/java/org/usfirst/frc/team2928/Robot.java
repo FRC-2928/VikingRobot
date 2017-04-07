@@ -18,6 +18,7 @@ public class Robot extends IterativeRobot {
 
     public static final Drivebase drivebase =  new Drivebase();
     public static final GearManipulator gearmanipulator = new GearManipulator();
+    public static final GearPickup gearpickup = new GearPickup();
     public static final RopeClimber ropeclimber = new RopeClimber();
     public static final Shooter shooter = new Shooter();
     public static final Shifter shifter = new Shifter();

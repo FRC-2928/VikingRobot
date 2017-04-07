@@ -65,8 +65,6 @@ public class Drivebase extends Subsystem {
     public void drive(double move, double rotate) {
         //Wires are stupid, drive things are backwards
         robotDrive.arcadeDrive(rotate, move);
-        System.out.println("Left output: "+ left.get());
-        System.out.println("Right output: "+ right.get());
     }
 
     public void rotate(double angularVelocity) {

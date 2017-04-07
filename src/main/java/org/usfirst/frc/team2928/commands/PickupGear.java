@@ -7,19 +7,18 @@ public class PickupGear extends Command{
     private boolean armUp;
     public PickupGear(boolean up){
         super();
-        requires(Robot.someArmThing);
-        fliperUp = up;
+        requires(Robot.gearpickup);
+        armUp = up;
     }
 
     @Override
     protected void initialize(){
         if(armUp) {
-            Robot.someArmThing.open();
-            Robot.someArmThing.close();
+            Robot.gearpickup.goDown();
         }
         else {
 
-            Robot.someArmThing.flipDown();
+            Robot.gearpickup.goUp();
         }
     }
 
