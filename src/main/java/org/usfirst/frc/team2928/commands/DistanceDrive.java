@@ -20,7 +20,7 @@ public class DistanceDrive extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        Robot.drivebase.drive(output,rotate * .01);
+        Robot.drivebase.drive(output,0);
     }
 
     @Override

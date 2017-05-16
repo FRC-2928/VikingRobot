@@ -5,9 +5,11 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2928.autonomous.*;
+import org.usfirst.frc.team2928.commands.ConstantDrive;
 import org.usfirst.frc.team2928.commands.ShiftDown;
 import org.usfirst.frc.team2928.subsystems.*;
 
@@ -63,6 +65,10 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
         new ShiftDown().start();
+        // Attempt to prevent half the talons from cutting out
+        new WaitCommand(0.1).start();
+        new ConstantDrive(0, 0.1);
+
         autoSelector.getSelected().start();
     }
 

@@ -13,6 +13,7 @@ public class GroundPickupUpCommand extends Command {
 
     @Override
     protected void initialize() {
+        super.initialize();
         Robot.gearpickup.goUp();
     }
 

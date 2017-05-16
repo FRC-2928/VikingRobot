@@ -17,7 +17,7 @@ public class ConstantDrive extends Command {
 
     @Override
     protected void execute() {
-        Robot.drivebase.drive(output, 0);
+        Robot.drivebase.drive(output, -Robot.drivebase.getGyroAngle() *.01);
     }
 
     @Override

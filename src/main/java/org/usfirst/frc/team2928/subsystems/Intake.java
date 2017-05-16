@@ -21,7 +21,7 @@ public class Intake extends Subsystem {
         talon.setSpeed(0);
     }
 
-    public  void reverseIntake(){talon.setSpeed(-.5);}
+    public  void reverseIntake(){talon.setSpeed(.5);}
 
     @Override
     protected void initDefaultCommand() {

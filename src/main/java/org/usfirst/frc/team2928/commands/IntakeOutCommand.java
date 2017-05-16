@@ -14,7 +14,7 @@ public class IntakeOutCommand extends Command {
 
     @Override
     protected void execute() {
-        Robot.intake.reverseIntkae();
+        Robot.intake.reverseIntake();
     }
 
     @Override
